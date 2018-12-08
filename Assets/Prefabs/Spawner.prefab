@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a820844ec7240c68a8c59361cf8c3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fanPrefab: {fileID: 1670007301866230, guid: 961749c2e3272694fb51763983d81697, type: 2}
+  fanPrefab: {fileID: 1344174612019594, guid: 3df2f8d73e5c94c7e8e67a6eb54a93df, type: 2}
+  fanArmsPrefab: {fileID: 1344174612019594, guid: 0f80740ca06ae4d2ab921bb280befd64,
+    type: 2}
   NumberOfObjectsInCircle: 10
   NumOfRows: 10
   standsInnerRadius: 10
