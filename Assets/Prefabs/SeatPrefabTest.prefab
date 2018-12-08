@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114679646199944512}
   - component: {fileID: 114857090075900662}
   - component: {fileID: 114372266805379966}
+  - component: {fileID: 114665658426635210}
   m_Layer: 0
   m_Name: SeatPrefabTest
   m_TagString: Untagged
@@ -71,6 +72,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114665658426635210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243142092261498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1060dcfa4c8484da9a56580361de6f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 5
+      y: 5
+      z: 5
 --- !u!114 &114679646199944512
 MonoBehaviour:
   m_ObjectHideFlags: 1

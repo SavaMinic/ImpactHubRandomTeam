@@ -220,7 +220,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4677838131167920, guid: b6c0cc676b689478e8c9bed9cd84dc78, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -8.4277777e-16
+      value: -8.427782e-16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c0cc676b689478e8c9bed9cd84dc78, type: 2}
