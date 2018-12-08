@@ -41,6 +41,7 @@ namespace RandomName.Wave
 			public EntityArray Entities;
 			
 			public ComponentDataArray<WavingFan> Fans;
+			public ComponentDataArray<Position> FansPositions;
 		}
 
 		struct WavesGroup
@@ -59,18 +60,31 @@ namespace RandomName.Wave
 		struct WavingJob : IJobParallelFor
 		{
 			public ComponentDataArray<WavingFan> Fans;
-			public ComponentDataArray<Position> WavePositions;
+			[ReadOnly] public ComponentDataArray<Position> WavePositions;
+			[ReadOnly] public ComponentDataArray<Position> FansPositions;
             
 			public float deltaTime;
+
+			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition)
+			{
+				// TODO: CALCULATE PROPERLY
+				var distance = math.distance(wavePosition, fanPosition);
+				return math.unlerp(10f, 0f, distance);
+			}
             
 			public void Execute(int index)
 			{
 				var fan = Fans[index];
+				var fanPosition = Fans[index].Value;
 				var waveAmount = 0f;
+				// find maximum wave influence on fan
 				for (int i = 0; i < WavePositions.Length; i++)
 				{
-					// TODO: CALCULATE MAXIMUM FOR EACH WAVE
-					waveAmount = 0.5f;
+					var amount = CalculateWaveToFanWavingAmount(WavePositions[i].Value, fanPosition);
+					if (amount > waveAmount)
+					{
+						waveAmount = amount;
+					}
 				}
 				fan.Value = waveAmount;
 				Fans[index] = fan;
@@ -87,6 +101,7 @@ namespace RandomName.Wave
 			var handle = new WavingJob
 			{
 				Fans = _fansGroup.Fans,
+				FansPositions = _fansGroup.FansPositions,
 				WavePositions = _wavesGroup.WavePositions,
 				// schedule it and say how many entities are there
 			}.Schedule(_fansGroup.Length, 32, inputDeps);
