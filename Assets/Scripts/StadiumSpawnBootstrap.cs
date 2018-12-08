@@ -61,10 +61,11 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 			{
 				var direction = new float3(math.sin(theta), 1, math.cos(theta));
 				var pos = radius * direction - new float3(0, startingHeight, 0);
+				var rot = quaternion.LookRotation(-new float3(direction.x, 0, direction.z), Up);
 				var entity = entityManager.Instantiate(fanPrefab);
 				entityManager.SetComponentData(entity, new Position {Value = pos});
-				entityManager.SetComponentData(entity, new Rotation {Value = quaternion.LookRotation(-new float3(direction.x, 0, direction.z), Up)});
-//				entityManager.SetSharedComponentData(entity, new MeshInstanceRenderer {material = material, mesh = mesh});
+				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
+				entityManager.SetComponentData(entity, new Rotation {Value = rot});
 			}
 		}
 		

@@ -312,7 +312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1390872951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +341,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1580178803
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595973221713980, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114077010903580898, guid: 677753002d5a11547b36936b8a41a563,
+        type: 2}
+      propertyPath: fanPrefab
+      value: 
+      objectReference: {fileID: 1344174612019594, guid: 3df2f8d73e5c94c7e8e67a6eb54a93df,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 677753002d5a11547b36936b8a41a563, type: 2}
+  m_IsPrefabAsset: 0
