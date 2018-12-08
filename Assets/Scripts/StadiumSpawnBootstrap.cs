@@ -41,7 +41,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 		Instance = this; // worst singleton ever but it works
 		
 		entityManager = World.Active.GetExistingManager<EntityManager>();
-		startingHeight = standsInnerRadius;
+		startingHeight = 14f;
 		transform = entityManager.CreateEntity(typeof(Position), typeof(Rotation));
 	}
 
@@ -55,21 +55,23 @@ public class StadiumSpawnBootstrap : MonoBehaviour
         Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentlevel + 1);
         const float spread = 0.5f;
 
-        var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
+		var dx = (standsOuterRadius - standsInnerRadius) / (NumOfRows + 2);
 		var circleRadians = math.radians(360f);
 		
 		var armOffset = new float3(0f, 1.3f, 0f);
 		var legOffset = new float3(0f, 0.55f, 0f);
 		var row = 0;
-		for (float radius = standsInnerRadius; radius <= standsOuterRadius; radius+= dx)
+		for (int i = 1; i < NumOfRows -1 ; i++)
 		{
+			var radius = standsInnerRadius + dx * i;
 			float dTheta = circleRadians / (radius * NumberOfObjectsInCircle);
 			var column = 0;
 			var maxColums = circleRadians / dTheta;
 			for (float theta = 0; theta < circleRadians ; theta += dTheta)
 			{
-				var direction = new float3(math.sin(theta), 1, math.cos(theta));
-				var pos = radius * direction - new float3(0, startingHeight, 0) + random.NextFloat3(new float3(spread, spread, spread), new float3(-spread, -spread, -spread));
+				var direction = new float3(math.sin(theta), 0.68f, math.cos(theta));
+				var pos = (radius + 0.3f * level) * direction - new float3(0, startingHeight, 0) +
+				          random.NextFloat3(new float3(spread, spread, spread), new float3(-spread, -0, -spread));
 				var rot = quaternion.LookRotation(-new float3(direction.x, 0f, direction.z), Up);
 				
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
@@ -114,7 +116,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 			row++;
 		} 
 		
-		standsInnerRadius = standsOuterRadius + 1f;
+		standsInnerRadius = standsOuterRadius;
 		standsOuterRadius += 10f;
         ++currentlevel;
         Debug.Log(count);
