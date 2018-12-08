@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
 	{
 		manager = World.Active.GetOrCreateManager<EntityManager>();
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(0);
-		SelectNewFan(0);
+		CameraController.I.OverviewCam(MaxLevel);
 	}
 
 	private void Update()
@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
 		{
 			MaxLevel++;
 			StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
+			CameraController.I.OverviewCam(MaxLevel);
 		}
 	}
 
