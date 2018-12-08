@@ -34,8 +34,7 @@ namespace RandomName.Wave
             {
                 var wave = Waves[index];
                 var wavePos = WavePositions[index];
-                // TODO: read this from some static array
-                var radius = (wave.Level + 1) * 10f;
+                var radius = wave.Radius;
                 
                 var center = wave.Center;
                 wave.Angle = wave.Angle + DeltaTime * wave.Speed;

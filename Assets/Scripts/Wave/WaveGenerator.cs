@@ -55,7 +55,8 @@ namespace RandomName.Wave
             var wave = manager.Instantiate(WavePrefab);
             manager.SetComponentData(wave, new Wave
             {
-                Angle = startAngle, Speed = speed, Level = level, Center = center
+                Angle = startAngle, Speed = speed, Level = level, Center = center,
+                Radius = GameSettings.I.GetRadiusPerLevel(level)
             });
         }
 
