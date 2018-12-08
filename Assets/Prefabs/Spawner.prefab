@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181640061913446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.986, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,6 +58,6 @@ MonoBehaviour:
     type: 2}
   seatPrefab: {fileID: 1243142092261498, guid: c17f7a910decc164abeed15d006d44df, type: 2}
   NumberOfObjectsInCircle: 3
-  NumOfRows: 10
-  standsInnerRadius: 10
-  standsOuterRadius: 20
+  NumOfRows: 5
+  standsInnerRadius: 20
+  standsOuterRadius: 30
