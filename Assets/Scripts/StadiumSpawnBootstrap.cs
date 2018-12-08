@@ -16,9 +16,10 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 	private GameObject fanPrefab;
 	[SerializeField]
 	private GameObject fanArmsPrefab;
+    [SerializeField]
+    private GameObject seatPrefab;
 
-
-	private MeshInstanceRendererComponent[] Meshes;
+    private MeshInstanceRendererComponent[] Meshes;
 
 	[SerializeField]
 	private int NumberOfObjectsInCircle;
@@ -71,7 +72,11 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
 				var isInteractable = column < 5 || column > maxColums - 5;
 				
-				var entity = entityManager.Instantiate(fanPrefab);
+                var seatEntity = entityManager.Instantiate(seatPrefab);
+                entityManager.SetComponentData(seatEntity, new Position { Value = pos });
+                entityManager.SetComponentData(seatEntity, new Rotation { Value = rot });
+
+                var entity = entityManager.Instantiate(fanPrefab);
 				entityManager.SetComponentData(entity, new Position { Value = pos });
 				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
 				entityManager.SetComponentData(entity, new Rotation { Value = rot });
