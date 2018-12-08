@@ -29,13 +29,17 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 	[SerializeField]
 	private float standsOuterRadius;
 
+	private Entity transform;
+
 	private float startingHeight;
 	
 	public void Awake()
 	{
 		Instance = this; // worst singleton ever but it works
+		
 		entityManager = World.Active.GetExistingManager<EntityManager>();
 		startingHeight = standsInnerRadius;
+		transform = entityManager.CreateEntity(typeof(Position), typeof(Rotation));
 	}
 
 	private static readonly float3 Up = new float3(0,1,0);
@@ -67,16 +71,18 @@ public class StadiumSpawnBootstrap : MonoBehaviour
                 entityManager.SetComponentData(entity, new WavingFan { Level = currentlevel });
 
 				var armsEntity = entityManager.Instantiate(fanArmsPrefab);
-				entityManager.SetComponentData(armsEntity, new Position { Value = pos + armsOffset });
+				entityManager.SetComponentData(armsEntity, new Position {Value = new float3(0, 1.3f / 5f, 0)});
 				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + armsOffset, InitRotationEuler = euler });
-				entityManager.SetComponentData(armsEntity, new Rotation { Value = rot });
+				entityManager.SetComponentData(armsEntity, new Rotation {Value = quaternion.identity});
                 entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentlevel });
-
+				
+				var attachEntity = entityManager.CreateEntity();
+				entityManager.AddComponentData(attachEntity, new Attach {Parent = entity, Child = armsEntity});
 				
 				GameController.I.AddNewFun(entity, level);
                 count += 2;
             }
-		}
+		} 
 		
 		standsInnerRadius = standsOuterRadius + 1f;
 		standsOuterRadius += 10f;
