@@ -61,6 +61,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 		var armOffset = new float3(0f, 1.3f, 0f);
 		var legOffset = new float3(0f, 0.55f, 0f);
 		var row = 0;
+		var interactibleFansCount = GameSettings.I.GetInteractibleFansPerLevel(level);
 		for (int i = 1; i < NumOfRows -1 ; i++)
 		{
 			var radius = standsInnerRadius + dx * i;
@@ -75,7 +76,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				var rot = quaternion.LookRotation(-new float3(direction.x, 0f, direction.z), Up);
 				
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
-				var isInteractable = column < 5 || column > maxColums - 5;
+				var isInteractable = column < interactibleFansCount || column > maxColums - interactibleFansCount;
 				
                 var seatEntity = entityManager.Instantiate(seatPrefab);
                 entityManager.SetComponentData(seatEntity, new Position { Value = pos + new float3(0, 0.3f, -0.0f)});

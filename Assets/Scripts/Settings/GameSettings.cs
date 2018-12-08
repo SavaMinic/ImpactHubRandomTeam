@@ -33,6 +33,14 @@ public class GameSettings : ScriptableObject
     [Header("Gameplay")]
     public float WavingFanAmountForSuccess;
     public float InteractIgnoreTime;
+    // starting from center
+    public List<int> InteractibleFansPerLevel;
+    
+    public float GetInteractibleFansPerLevel(int level)
+    {
+        level = Mathf.Clamp(level, 0, InteractibleFansPerLevel.Count - 1);
+        return InteractibleFansPerLevel[level];
+    }
     
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;
