@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedData:
     Value:
-      x: 5
+      x: 6
       y: 5
       z: 5
 --- !u!114 &114679646199944512

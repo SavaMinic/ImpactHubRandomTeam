@@ -27,7 +27,7 @@ MonoBehaviour:
   - 130
   - 140
   - 150
-  debug1: 5
+  debug1: 4.6
   debug2: 100
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4

@@ -76,7 +76,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				var isInteractable = column < 5 || column > maxColums - 5;
 				
                 var seatEntity = entityManager.Instantiate(seatPrefab);
-                entityManager.SetComponentData(seatEntity, new Position { Value = pos });
+                entityManager.SetComponentData(seatEntity, new Position { Value = pos + new float3(0, 0.3f, -0.0f)});
                 entityManager.SetComponentData(seatEntity, new Rotation { Value = rot });
 
                 var entity = entityManager.Instantiate(fanPrefab);
