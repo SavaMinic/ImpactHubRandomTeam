@@ -1,6 +1,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RandomName.Wave
 {
@@ -38,12 +39,14 @@ namespace RandomName.Wave
 
             waveTestSystem = World.Active.GetExistingManager<WaveTestSystem>();
             waveTestSystem.Enabled = true;
-            
-            AddWave(0, 0, 5f, float3.zero);
-            AddWave(0, 90, 5f, float3.zero);
-            AddWave(0, 0, -3f, float3.zero);
-            AddWave(0, 0, -1f, float3.zero);
-            AddWave(0, 180, 2f, float3.zero);
+
+            for (int level = 0; level < 15; level++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    AddWave(level, Random.Range(-90, 90), Random.Range(-4f, 4f), float3.zero);
+                }
+            }
         }
 
         #endregion
