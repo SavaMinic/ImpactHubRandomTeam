@@ -32,6 +32,18 @@ MonoBehaviour:
   WavingFanAmountForSuccess: 0.2
   InteractIgnoreTime: 1.5
   InteractibleFansPerLevel: 03000000080000000f00000014000000190000001e0000002300000028000000
+  IncreaseForSuccess: 5
+  DecreaseForFailure: -3
+  DecreaseForMiss: -2
+  ScorePerLevel:
+  - 6
+  - 10
+  - 15
+  - 20
+  - 20
+  - 25
+  - 35
+  - 45
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000

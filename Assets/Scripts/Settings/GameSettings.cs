@@ -41,6 +41,17 @@ public class GameSettings : ScriptableObject
         level = Mathf.Clamp(level, 0, InteractibleFansPerLevel.Count - 1);
         return InteractibleFansPerLevel[level];
     }
+
+    public float IncreaseForSuccess;
+    public float DecreaseForFailure;
+    public float DecreaseForMiss;
+    public List<float> ScorePerLevel;
+    
+    public float GetScorePerLevel(int level)
+    {
+        level = Mathf.Clamp(level, 0, ScorePerLevel.Count - 1);
+        return ScorePerLevel[level];
+    }
     
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;
