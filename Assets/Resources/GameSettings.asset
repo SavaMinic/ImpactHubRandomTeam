@@ -31,14 +31,14 @@ MonoBehaviour:
   debug2: 100
   WavingFanAmountForSuccess: 0.2
   InteractIgnoreTime: 1.5
-  InteractibleFansPerLevel: 050000000a0000000f00000014000000190000001e0000002300000028000000
+  InteractibleFansPerLevel: 03000000080000000f00000014000000190000001e0000002300000028000000
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000
-  MaxInteractionAtOnce: 8
+  MaxInteractionAtOnce: 5
   InteractionOffsetPerLevel:
-  - 3
-  - 4
+  - 1
+  - 2.5
   - 4
   - 5
   - 5.5

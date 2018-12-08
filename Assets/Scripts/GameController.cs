@@ -127,6 +127,10 @@ public class GameController : MonoBehaviour
 					var pos = manager.GetComponentData<Position>(randomEntity).Value;
 					MainCanvas.I.ShowInteractButton(pos, randomEntity, MaxLevel);
 				}
+				if (activeInteractibleFans.Count >= GameSettings.I.MaxInteractionAtOnce)
+				{
+					break;
+				}
 			}
 		}
 	}
