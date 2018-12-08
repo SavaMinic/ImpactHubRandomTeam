@@ -380,12 +380,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114077010903580898, guid: 677753002d5a11547b36936b8a41a563,
-        type: 2}
-      propertyPath: fanPrefab
-      value: 
-      objectReference: {fileID: 1344174612019594, guid: 3df2f8d73e5c94c7e8e67a6eb54a93df,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677753002d5a11547b36936b8a41a563, type: 2}
   m_IsPrefabAsset: 0

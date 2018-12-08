@@ -82,8 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a820844ec7240c68a8c59361cf8c3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fanPrefab: {fileID: 1670007301866230, guid: 961749c2e3272694fb51763983d81697, type: 2}
-  NumberOfObjectsInCircle: 10
+  fanPrefab: {fileID: 1344174612019594, guid: 3df2f8d73e5c94c7e8e67a6eb54a93df, type: 2}
+  fanArmsPrefab: {fileID: 1344174612019594, guid: 0f80740ca06ae4d2ab921bb280befd64,
+    type: 2}
+  NumberOfObjectsInCircle: 3
   NumOfRows: 10
   standsInnerRadius: 10
   standsOuterRadius: 20
@@ -102,6 +104,7 @@ MonoBehaviour:
     count: 10
     innerRadius: 10
     outerRadius: 20
+    startingHeight: 0
     rows: 10
     mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     material: {fileID: 2100000, guid: 1fbb9e9feb42ecf4fb0e985ec9e8b9c7, type: 2}
