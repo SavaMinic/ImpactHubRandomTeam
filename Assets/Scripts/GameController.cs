@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
 					});
 					activeInteractibleFans.Add(randomEntity);
 					var pos = manager.GetComponentData<Position>(randomEntity).Value;
-					MainCanvas.I.ShowInteractButton(pos, randomEntity);
+					MainCanvas.I.ShowInteractButton(pos, randomEntity, MaxLevel);
 				}
 			}
 		}

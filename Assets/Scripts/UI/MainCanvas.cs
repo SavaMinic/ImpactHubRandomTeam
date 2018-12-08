@@ -46,12 +46,13 @@ namespace RandomName.UI
 
         #region Public
 
-        public void ShowInteractButton(Vector3 entityPos, Entity entity)
+        public void ShowInteractButton(Vector3 entityPos, Entity entity, int level)
         {
             var button = Instantiate(bubblePrefab);
             button.transform.SetParent(transform);
 
-            var pos = entityPos + Vector3.up * 1.8f;
+            var offset = GameSettings.I.GetInteractionOffsetPerLevel(level);
+            var pos = entityPos + Vector3.up * offset;
             Vector2 viewportPoint = mainCamera.WorldToScreenPoint(pos);
             button.Show(viewportPoint, entity);
             

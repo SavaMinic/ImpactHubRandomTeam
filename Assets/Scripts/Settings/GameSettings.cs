@@ -47,11 +47,18 @@ public class GameSettings : ScriptableObject
     public float TimeToGenerateInteraction;
     public List<int> InteractionCountPerLevel;
     public int MaxInteractionAtOnce = 10;
+    public List<float> InteractionOffsetPerLevel;
     
     public float GetInteractionCountPerLevel(int level)
     {
         level = Mathf.Clamp(level, 0, InteractionCountPerLevel.Count - 1);
         return InteractionCountPerLevel[level];
+    }
+    
+    public float GetInteractionOffsetPerLevel(int level)
+    {
+        level = Mathf.Clamp(level, 0, InteractionOffsetPerLevel.Count - 1);
+        return InteractionOffsetPerLevel[level];
     }
 
 }

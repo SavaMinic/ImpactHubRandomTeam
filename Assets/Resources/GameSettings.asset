@@ -36,3 +36,10 @@ MonoBehaviour:
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000
   MaxInteractionAtOnce: 8
+  InteractionOffsetPerLevel:
+  - 3
+  - 4
+  - 4
+  - 5
+  - 5.5
+  - 6
