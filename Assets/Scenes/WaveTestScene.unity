@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 510380444}
   - component: {fileID: 510380443}
   - component: {fileID: 510380442}
+  - component: {fileID: 510380446}
   - component: {fileID: 510380441}
   - component: {fileID: 510380440}
   - component: {fileID: 510380445}
@@ -214,6 +215,22 @@ MonoBehaviour:
     subMesh: 0
     castShadows: 0
     receiveShadows: 0
+--- !u!114 &510380446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 510380439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1060dcfa4c8484da9a56580361de6f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 1
+      y: 1
+      z: 1
 --- !u!1 &720769380
 GameObject:
   m_ObjectHideFlags: 0
