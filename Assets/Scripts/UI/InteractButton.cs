@@ -64,11 +64,8 @@ namespace RandomName.UI
 
         private void OnButtonClick()
         {
-            // TODO: fade out
             // notify system
             MainCanvas.I.ButtonClicked(myEntity);
-
-            Die();
         }
 
         private IEnumerator FadeAnim(bool isFadeIn, float duration = 0.2f, Action callback = null)

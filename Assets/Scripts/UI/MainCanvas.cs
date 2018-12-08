@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
@@ -14,6 +16,15 @@ namespace RandomName.UI
         public InteractButton bubblePrefab;
 
         private Camera mainCamera;
+
+        [Serializable]
+        private class ButtonWithEntity
+        {
+            public Entity Entity;
+            public InteractButton Button;
+        }
+
+        private List<ButtonWithEntity> buttons = new List<ButtonWithEntity>();
 
         #region Mono
 
@@ -35,27 +46,54 @@ namespace RandomName.UI
 
         #region Public
 
-        public void ShowInteractButton(Vector3 entityPos, Entity entity)
+        public void ShowInteractButton(Vector3 entityPos, Entity entity, int level)
         {
             var button = Instantiate(bubblePrefab);
             button.transform.SetParent(transform);
 
-            var pos = entityPos + Vector3.up * 1.8f;
+            var offset = GameSettings.I.GetInteractionOffsetPerLevel(level);
+            var pos = entityPos + Vector3.up * offset;
             Vector2 viewportPoint = mainCamera.WorldToScreenPoint(pos);
             button.Show(viewportPoint, entity);
+            
+            buttons.Add(new ButtonWithEntity()
+            {
+                Entity = entity,
+                Button = button,
+            });
+        }
+
+        public void ClearButton(Entity entity)
+        {
+            var index = buttons.FindIndex(b => b.Entity == entity);
+            if (index == -1)
+            {
+                Debug.LogError("NO BUTTON WITH INDEX");
+                return;
+            }
+            buttons[index].Button.Die();
+            buttons.RemoveAt(index);
         }
 
         public void ClearAllInteractible()
         {
-            var buttons = GetComponentsInChildren<InteractButton>();
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].Die();
+                buttons[i].Button.Die();
             }
+            buttons.Clear();
         }
 
         public void ButtonClicked(Entity entity)
         {
+            var index = buttons.FindIndex(b => b.Entity == entity);
+            if (index == -1)
+            {
+                Debug.LogError("NO BUTTON WITH INDEX");
+                return;
+            }
+            buttons[index].Button.Die();
+            buttons.RemoveAt(index);
             GameController.I.FanInteracted(entity);
         }
 
