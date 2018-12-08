@@ -20,6 +20,10 @@ namespace RandomName.UI
         private void Awake()
         {
             I = this;
+            
+            // just to pre-fetch it
+            var button = Instantiate(bubblePrefab);
+            Destroy(button.gameObject);
         }
 
         void Start()
