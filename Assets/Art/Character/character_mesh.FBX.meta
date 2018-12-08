@@ -12,6 +12,7 @@ ModelImporter:
     400004: char_legs
     400006: //RootNode
     2100000: mat_skin
+    2100002: 'Material #53'
     2300000: char_arms
     2300002: char_body
     2300004: char_legs
@@ -23,7 +24,7 @@ ModelImporter:
     4300004: char_legs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -79,7 +80,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
