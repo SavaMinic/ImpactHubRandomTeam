@@ -31,22 +31,12 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 	{
 		Instance = this; // worst singleton ever but it works
 		entityManager = World.Active.GetExistingManager<EntityManager>();
+		startingHeight = standsInnerRadius;
 	}
 
 	private void Start()
 	{
-
-		startingHeight = standsInnerRadius;
-		var spawnEntity = entityManager.CreateEntity(typeof(SpawnEntitiesComponent));
-		entityManager.SetComponentData(spawnEntity, new SpawnEntitiesComponent
-		{
-			Count = NumberOfObjectsInCircle,
-			InnerRadius = standsInnerRadius,
-			OuterRadius = standsOuterRadius,
-			Rows = NumOfRows,
-		});
-		
-//		InstantiateEntities(NumberOfObjectsInCircle, standsInnerRadius, standsOuterRadius, NumOfRows);
+		InstantiateEntities();
 	}
 
 	private void Update()
@@ -59,40 +49,22 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
 	private static readonly float3 Up = new float3(0,1,0);
 	
-	public void InstantiateEntities( int count, float innerRadius, float outerRadius, int rows, Mesh mesh, Material material)
-	{
-		var dx = (outerRadius - innerRadius) / rows;
-		
-		for (float radius = innerRadius; radius <= outerRadius; radius+= dx)
-		{
-			float dTheta = 360f / (radius * count);
-			for (float theta = 0; theta < 360; theta += dTheta)
-			{
-				var direction = new float3(math.sin(theta), 1, math.cos(theta));
-				var pos = radius * direction - new float3(0, innerRadius, 0);
-				var entity = entityManager.Instantiate(fanPrefab);
-				entityManager.SetComponentData(entity, new Position {Value = pos});
-				entityManager.SetComponentData(entity, new Rotation {Value = quaternion.LookRotation(-new float3(direction.x, 0, direction.z), Up)});
-				entityManager.SetSharedComponentData(entity, new MeshInstanceRenderer {material = material, mesh = mesh});
-			}
-		}
-	}
-	
 	public void InstantiateEntities()
 	{
 		var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
+		var circleRadians = math.radians(360f);
 		
 		for (float radius = standsInnerRadius; radius <= standsOuterRadius; radius+= dx)
 		{
-			float dTheta = 360f / (radius * NumberOfObjectsInCircle);
-			for (float theta = 0; theta < 360; theta += dTheta)
+			float dTheta = circleRadians / (radius * NumberOfObjectsInCircle);
+			for (float theta = 0; theta < circleRadians ; theta += dTheta)
 			{
 				var direction = new float3(math.sin(theta), 1, math.cos(theta));
 				var pos = radius * direction - new float3(0, startingHeight, 0);
 				var entity = entityManager.Instantiate(fanPrefab);
 				entityManager.SetComponentData(entity, new Position {Value = pos});
 				entityManager.SetComponentData(entity, new Rotation {Value = quaternion.LookRotation(-new float3(direction.x, 0, direction.z), Up)});
-				//entityManager.SetSharedComponentData(entity, new MeshInstanceRenderer {material = , mesh = mesh});
+//				entityManager.SetSharedComponentData(entity, new MeshInstanceRenderer {material = material, mesh = mesh});
 			}
 		}
 		
