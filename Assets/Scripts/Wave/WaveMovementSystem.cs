@@ -1,3 +1,4 @@
+using System;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -24,14 +25,27 @@ namespace RandomName.Wave
         [BurstCompile]
         struct WavingJob : IJobParallelFor
         {
-            [ReadOnly] public ComponentDataArray<Wave> Waves;
+            public ComponentDataArray<Wave> Waves;
             public ComponentDataArray<Position> WavePositions;
             
-            public float deltaTime;
+            public float DeltaTime;
             
             public void Execute(int index)
             {
-                // TODO: move wave
+                var wave = Waves[index];
+                var wavePos = WavePositions[index];
+                // TODO: read this from some static array
+                var radius = (wave.Level + 1) * 10f;
+                
+                var center = float2.zero;
+                wave.Angle = wave.Angle + DeltaTime * wave.Speed;
+                Waves[index] = wave;
+                float x = center.x + math.cos(wave.Angle) * radius;
+                float y = wavePos.Value.y;
+                float z = center.y + math.sin(wave.Angle) * radius;
+                
+                wavePos.Value = new float3(x,y,z);
+                WavePositions[index] = wavePos;
             }
         }
         
@@ -46,7 +60,7 @@ namespace RandomName.Wave
             {
                 Waves = _wavesGroup.Waves,
                 WavePositions = _wavesGroup.WavePositions,
-                deltaTime = Time.deltaTime,
+                DeltaTime = Time.deltaTime,
                 // schedule it and say how many entities are there
             }.Schedule(_wavesGroup.Length, 32, inputDeps);
 			

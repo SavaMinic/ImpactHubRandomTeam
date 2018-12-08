@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using RandomName.Wave;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -21,15 +22,13 @@ namespace RandomName.Wave
 	[Serializable]
 	public struct Wave : IComponentData
 	{
+		public float Angle;
+		
 		// what level of stadium
 		public int Level;
 		// how fast does wave move
 		public float Speed;
 	}
-    
-	// just a wrapper for showing inside unity
-	public class WavingFanComponent : ComponentDataWrapper<WavingFan> { }
-	public class WaveComponent : ComponentDataWrapper<Wave> { }
 	
 	
 	public class WaveSystem : JobComponentSystem
