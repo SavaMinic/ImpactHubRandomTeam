@@ -57,16 +57,16 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float3 color = tex2D(_InputTexture, i.uv).rgb;
-				color = pow(color, 2.2);
-				float3 diffusePart = dot(normalize(i.normal), normalize(l)) * _LightColor * _LightIntensity * color;
-				float3 ambientPart = _AmbientColor * color;
 				float3 l = _LightDirection - i.world;
 				float3 v = _WorldSpaceCameraPos - i.world;
 				float3 h = normalize(l + v);
 				float s = dot(normalize(i.normal), normalize(h));
 				s = pow(s, _SpecPow);
 				float3 specularPart = _SpecularColor * s * _LightIntensity * _LightColor;
+				float3 color = tex2D(_InputTexture, i.uv).rgb;
+				color = pow(color, 2.2);
+				float3 diffusePart = dot(normalize(i.normal), normalize(l)) * _LightColor * _LightIntensity * color;
+				float3 ambientPart = _AmbientColor * color;
 				return fixed4(pow(ambientPart + diffusePart + specularPart, 0.4545), 1);
 			}
 			ENDCG
