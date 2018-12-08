@@ -3,6 +3,7 @@ using Unity.Mathematics;
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
+using RandomName.Wave;
 
 public class StadiumSpawnBootstrap : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
 	private static readonly float3 Up = new float3(0,1,0);
 	
-	public void InstantiateEntities()
+    private int currentlevel = 0;
+    private int count = 0;
+
+    public void InstantiateEntities()
 	{
 		var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
 		var circleRadians = math.radians(360f);
@@ -70,18 +74,24 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
 				
 				var entity = entityManager.Instantiate(fanPrefab);
-				entityManager.SetComponentData(entity, new Position {Value = pos});
+				entityManager.SetComponentData(entity, new Position { Value = pos });
 				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
-				entityManager.SetComponentData(entity, new Rotation {Value = rot});
+				entityManager.SetComponentData(entity, new Rotation { Value = rot });
+                entityManager.SetComponentData(entity, new WavingFan { Level = currentlevel });
 
 				var armsEntity = entityManager.Instantiate(fanArmsPrefab);
-				entityManager.SetComponentData(armsEntity, new Position {Value = pos + armsOffset});
+				entityManager.SetComponentData(armsEntity, new Position { Value = pos + armsOffset });
 				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + armsOffset, InitRotationEuler = euler });
-				entityManager.SetComponentData(armsEntity, new Rotation {Value = rot});
-			}
+				entityManager.SetComponentData(armsEntity, new Rotation { Value = rot });
+                entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentlevel });
+
+                count += 2;
+            }
 		}
 		
 		standsInnerRadius = standsOuterRadius + 1f;
 		standsOuterRadius += 10f;
-	}
+        ++currentlevel;
+        Debug.Log(count);
+    }
 }

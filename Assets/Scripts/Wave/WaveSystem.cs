@@ -17,6 +17,8 @@ namespace RandomName.Wave
 	public struct WavingFan : IComponentData
 	{
 		public float Value;
+        public float Level;
+
 	}
 	
 	[Serializable]
@@ -61,14 +63,17 @@ namespace RandomName.Wave
 		struct WavingJob : IJobParallelFor
 		{
 			public ComponentDataArray<WavingFan> Fans;
-			[ReadOnly] public ComponentDataArray<Position> WavePositions;
+            [ReadOnly] public ComponentDataArray<Wave> Waves;
+            [ReadOnly] public ComponentDataArray<Position> WavePositions;
 			[ReadOnly] public ComponentDataArray<Position> FansPositions;
 
 			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition)
 			{
 				// TODO: CALCULATE PROPERLY
-				var distance = math.distance(wavePosition, fanPosition);
-				return math.unlerp(10f, 0f, distance);
+				///var distance = math.distance(wavePosition.xz, fanPosition.xz);
+				///return math.unlerp(10f, 0f, distance);
+
+                return (math.dot(math.normalize(wavePosition.xz), math.normalize(fanPosition.xz)) + 1) / 2;
 			}
             
 			public void Execute(int index)
@@ -79,12 +84,15 @@ namespace RandomName.Wave
 				// find maximum wave influence on fan
 				for (int i = 0; i < WavePositions.Length; i++)
 				{
-					var amount = CalculateWaveToFanWavingAmount(WavePositions[i].Value, fanPosition);
-					if (amount > waveAmount)
-					{
-						waveAmount = amount;
-					}
-				}
+                    var wave = Waves[i];
+                    if (fan.Level == wave.Level) {
+					    var amount = CalculateWaveToFanWavingAmount(WavePositions[i].Value, fanPosition);
+					    if (amount > waveAmount)
+					    {
+						    waveAmount = amount;
+					    }
+                    }
+                }
 				fan.Value = waveAmount;
 				Fans[index] = fan;
 			}
@@ -102,6 +110,7 @@ namespace RandomName.Wave
 				Fans = _fansGroup.Fans,
 				FansPositions = _fansGroup.FansPositions,
 				WavePositions = _wavesGroup.WavePositions,
+                Waves = _wavesGroup.Waves,
 				// schedule it and say how many entities are there
 			}.Schedule(_fansGroup.Length, 32, inputDeps);
 			
