@@ -17,7 +17,7 @@ namespace RandomName.Wave
 	public struct WavingFan : IComponentData
 	{
 		public float Value;
-        public float Level;
+        public int Level;
 
 	}
 	
@@ -67,14 +67,13 @@ namespace RandomName.Wave
             [ReadOnly] public ComponentDataArray<Position> WavePositions;
 			[ReadOnly] public ComponentDataArray<Position> FansPositions;
 
-			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition)
+			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition, int level)
 			{
-				// TODO: CALCULATE PROPERLY
-				///var distance = math.distance(wavePosition.xz, fanPosition.xz);
-				///return math.unlerp(10f, 0f, distance);
-
-                return (math.dot(math.normalize(wavePosition.xz), math.normalize(fanPosition.xz)) + 1) / 2;
-			}
+                float2 origin = math.distance(fanPosition.xz, float2.zero) * math.normalize(wavePosition.xz);
+                var distance = math.distance(origin, fanPosition.xz);
+                return math.unlerp(10f, 0f, distance);
+                //return (math.dot(math.normalize(wavePosition.xz), math.normalize(fanPosition.xz)) + 1) / 2;
+            }
             
 			public void Execute(int index)
 			{
@@ -86,7 +85,7 @@ namespace RandomName.Wave
 				{
                     var wave = Waves[i];
                     if (fan.Level == wave.Level) {
-					    var amount = CalculateWaveToFanWavingAmount(WavePositions[i].Value, fanPosition);
+					    var amount = CalculateWaveToFanWavingAmount(WavePositions[i].Value, fanPosition, fan.Level);
 					    if (amount > waveAmount)
 					    {
 						    waveAmount = amount;
