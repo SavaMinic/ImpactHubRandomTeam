@@ -12,9 +12,11 @@ public class HandsSystem : JobComponentSystem {
     [BurstCompile]
     struct HandsJob : IJobProcessComponentData<Rotation, Position, Hands, WavingFan>
     {   
-        public void Execute(ref Rotation rotation, [ReadOnly] ref Position position, [ReadOnly]ref Hands hands, [ReadOnly]ref WavingFan wavingFan)
+        public void Execute(ref Rotation rotation, ref Position position, [ReadOnly]ref Hands hands, [ReadOnly]ref WavingFan wavingFan)
         {
-            rotation.Value = Quaternion.Euler(math.lerp(0f, -90f, wavingFan.Value), 0, 0);
+            position.Value.y = hands.InitPosition.y + wavingFan.Value * 100f;
+            rotation.Value = math.mul(hands.InitRotationEuler,
+                quaternion.Euler(math.lerp(0f, -180f, wavingFan.Value), 0, 0));
         }
     }
 

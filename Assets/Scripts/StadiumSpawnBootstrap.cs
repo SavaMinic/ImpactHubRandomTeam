@@ -16,9 +16,10 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 	private GameObject fanPrefab;
 	[SerializeField]
 	private GameObject fanArmsPrefab;
+    [SerializeField]
+    private GameObject seatPrefab;
 
-
-	private MeshInstanceRendererComponent[] Meshes;
+    private MeshInstanceRendererComponent[] Meshes;
 
 	[SerializeField]
 	private int NumberOfObjectsInCircle;
@@ -55,7 +56,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
         var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
 		var circleRadians = math.radians(360f);
 		
-		var armsOffset = new float3(0f, 1.2f, 0f);
+		var offset = new float3(0f, 1.3f, 0f);
 		var row = 0;
 		for (float radius = standsInnerRadius; radius <= standsOuterRadius; radius+= dx)
 		{
@@ -71,7 +72,11 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
 				var isInteractable = column < 5 || column > maxColums - 5;
 				
-				var entity = entityManager.Instantiate(fanPrefab);
+                var seatEntity = entityManager.Instantiate(seatPrefab);
+                entityManager.SetComponentData(seatEntity, new Position { Value = pos });
+                entityManager.SetComponentData(seatEntity, new Rotation { Value = rot });
+
+                var entity = entityManager.Instantiate(fanPrefab);
 				entityManager.SetComponentData(entity, new Position { Value = pos });
 				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
 				entityManager.SetComponentData(entity, new Rotation { Value = rot });
@@ -84,13 +89,13 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				}
 
 				var armsEntity = entityManager.Instantiate(fanArmsPrefab);
-				entityManager.SetComponentData(armsEntity, new Position {Value = new float3(0, 1.3f / 5f, 0)});
-				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + armsOffset, InitRotationEuler = euler });
-				entityManager.SetComponentData(armsEntity, new Rotation {Value = quaternion.identity});
+				entityManager.SetComponentData(armsEntity, new Position {Value = pos+offset});
+				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + offset, InitRotationEuler = rot });
+				entityManager.SetComponentData(armsEntity, new Rotation {Value = rot});
                 entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentlevel });
-				
-				var attachEntity = entityManager.CreateEntity();
-				entityManager.AddComponentData(attachEntity, new Attach {Parent = entity, Child = armsEntity});
+				entityManager.SetComponentData(armsEntity, new Scale {Value = new float3(5, 5, 5)});
+//				var attachEntity = entityManager.CreateEntity();
+//				entityManager.AddComponentData(attachEntity, new Attach {Parent = entity, Child = armsEntity});
 				
 				GameController.I.AddNewFun(entity, level, isInteractable);
                 count += 2;
