@@ -21,6 +21,8 @@ public class GameSettings : ScriptableObject
     #endregion
 
     public List<float> RadiusPerLevel;
+    public float debug1;
+    public float debug2;
 
     public float GetRadiusPerLevel(int level)
     {
