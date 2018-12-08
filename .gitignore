@@ -43,3 +43,6 @@ Assets/Unity-Logs-Viewer
 Unity-Logs-Viewer.meta
 build_info.txt
 build_info.txt.meta
+Assets/Plugins/Editor
+Editor.meta
+Plugins.meta
