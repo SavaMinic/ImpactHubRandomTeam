@@ -63,8 +63,8 @@ public class GameController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
-			var randLevel = Random.Range(0, MaxLevel);
-			SelectNewFan(randLevel);
+			var midLevel = Mathf.FloorToInt(MaxLevel / 2f);
+			SelectNewFan(midLevel);
 		}
 		
 		if (Input.GetKeyDown(KeyCode.Space))
