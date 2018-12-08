@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +13,9 @@ namespace RandomName.UI
         private CanvasGroup myCanvasGroup;
         private Button myButton;
 
-        private int myEntityId;
+        private Entity myEntity;
+
+        private IEnumerator fadeAnim;
         
         private void Awake()
         {
@@ -29,23 +34,53 @@ namespace RandomName.UI
             myButton.onClick.RemoveListener(OnButtonClick);
         }
 
-        public void Show(Vector3 pos, int entityId)
+        public void Show(Vector3 pos, Entity entity)
         {
-            myEntityId = entityId;
+            myEntity = entity;
             
             // TODO: fade in
-            myCanvasGroup.alpha = 1f;
+            if (fadeAnim != null)
+            {
+                StopCoroutine(fadeAnim);
+            }
+            fadeAnim = FadeAnim(true, 0.4f);
+            StartCoroutine(fadeAnim);
 
             transform.position = pos;
+        }
+
+        public void Die()
+        {
+            if (fadeAnim != null)
+            {
+                StopCoroutine(fadeAnim);
+            }
+            fadeAnim = FadeAnim(false, 0.2f, () =>
+            {
+                Destroy(gameObject);
+            });
+            StartCoroutine(fadeAnim);
         }
 
         private void OnButtonClick()
         {
             // TODO: fade out
             // notify system
-            MainCanvas.I.ButtonClicked(myEntityId);
-            // destroy
-            Destroy(gameObject);
+            MainCanvas.I.ButtonClicked(myEntity);
+
+            Die();
+        }
+
+        private IEnumerator FadeAnim(bool isFadeIn, float duration = 0.2f, Action callback = null)
+        {
+            var endAlpha = isFadeIn ? 1f : 0f;
+            float alpha = myCanvasGroup.alpha;
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / duration)
+            {
+                myCanvasGroup.alpha = Mathf.Lerp(alpha, endAlpha, t);
+                yield return null;
+            }
+            callback?.Invoke();
         }
     }
 }

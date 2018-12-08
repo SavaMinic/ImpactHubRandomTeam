@@ -54,6 +54,7 @@ MonoBehaviour:
   fanPrefab: {fileID: 1344174612019594, guid: 3df2f8d73e5c94c7e8e67a6eb54a93df, type: 2}
   fanArmsPrefab: {fileID: 1344174612019594, guid: 0f80740ca06ae4d2ab921bb280befd64,
     type: 2}
+  seatPrefab: {fileID: 1243142092261498, guid: c17f7a910decc164abeed15d006d44df, type: 2}
   NumberOfObjectsInCircle: 3
   NumOfRows: 10
   standsInnerRadius: 10
