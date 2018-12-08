@@ -75,10 +75,10 @@ public class GameController : MonoBehaviour
 			SelectNewFan(midLevel);
 		}
 		
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && MaxLevel < 7)
 		{
-			MaxLevel++;
-			StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
+            MaxLevel++;
+            StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
 			CameraController.I.OverviewCam(MaxLevel);
 			ClearAllInteractible();
 			timeToGenerateInteraction = GameSettings.I.StartTimeToGenerateInteraction;

@@ -47,12 +47,12 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
 	private static readonly float3 Up = new float3(0,1,0);
 	
-    private int currentlevel = 0;
+    private static int currentLevel = 0;
     private int count = 0;
 
     public void InstantiateEntities(int level)
 	{
-        Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentlevel + 1);
+        Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentLevel + 1);
         const float spread = 0.5f;
 
 		var dx = (standsOuterRadius - standsInnerRadius) / (NumOfRows + 2);
@@ -85,7 +85,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				entityManager.SetComponentData(entity, new Position { Value = pos });
 				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
 				entityManager.SetComponentData(entity, new Rotation { Value = rot });
-                entityManager.SetComponentData(entity, new WavingFan { Level = currentlevel });
+                entityManager.SetComponentData(entity, new WavingFan { Level = currentLevel });
                 entityManager.AddComponentData(entity, new SeatingData { Column = column, Row = row });
 				// just for fans in this columns, always visible by camera
 				if (isInteractable)
@@ -97,14 +97,14 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				entityManager.SetComponentData(armsEntity, new Position {Value = pos+armOffset});
 				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + armOffset, InitRotationEuler = rot });
 				entityManager.SetComponentData(armsEntity, new Rotation {Value = rot});
-                entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentlevel });
+                entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentLevel });
 				entityManager.SetComponentData(armsEntity, new Scale {Value = new float3(5, 5, 5)});
 				
 				var legEntity = entityManager.Instantiate(fanLegPrefab);
 				entityManager.SetComponentData(legEntity, new Position {Value = pos + legOffset});
 				entityManager.SetComponentData(legEntity, new Legs() { InitPosition = pos + legOffset, InitRotation = rot });
 				entityManager.SetComponentData(legEntity, new Rotation {Value = rot});
-				entityManager.SetComponentData(legEntity, new WavingFan { Level = currentlevel });
+				entityManager.SetComponentData(legEntity, new WavingFan { Level = currentLevel });
 				entityManager.SetComponentData(legEntity, new Scale {Value = new float3(5, 5, 5)});
 //				var attachEntity = entityManager.CreateEntity();
 //				entityManager.AddComponentData(attachEntity, new Attach {Parent = entity, Child = armsEntity});
@@ -118,7 +118,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 		
 		standsInnerRadius = standsOuterRadius;
 		standsOuterRadius += 10f;
-        ++currentlevel;
+        ++currentLevel;
         Debug.Log(count);
     }
 }
