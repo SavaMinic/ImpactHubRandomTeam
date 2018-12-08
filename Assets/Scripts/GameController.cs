@@ -82,6 +82,8 @@ public class GameController : MonoBehaviour
 			timeToGenerateInteraction = GameSettings.I.StartTimeToGenerateInteraction;
 		}
 		
+		// check activeInteractibleFans if they are ok
+		
 		// is it time?
 		timeToGenerateInteraction -= Time.deltaTime / Time.timeScale;
 		if (timeToGenerateInteraction <= 0 && activeInteractibleFans.Count < GameSettings.I.MaxInteractionAtOnce)
@@ -110,6 +112,17 @@ public class GameController : MonoBehaviour
 
 	public void FanInteracted(Entity entity)
 	{
+		var fanAmount = manager.GetComponentData<WavingFan>(entity).Value * 100f;
+		if (fanAmount > GameSettings.I.WavingFanAmountForSuccess)
+		{
+			// SUCCESS
+			Debug.LogError("SUCCESS " + fanAmount);
+		}
+		else
+		{
+			// FAIL
+			Debug.LogError("FAIL " + fanAmount);
+		}
 		activeInteractibleFans.Remove(entity);
 		manager.SetComponentData(entity, new InteractiveTag { LookingForAttention = 0 });
 	}

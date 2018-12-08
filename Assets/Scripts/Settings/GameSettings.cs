@@ -29,7 +29,9 @@ public class GameSettings : ScriptableObject
         level = Mathf.Clamp(level, 0, RadiusPerLevel.Count - 1);
         return RadiusPerLevel[level];
     }
-    
+
+    [Header("Gameplay")]
+    public float WavingFanAmountForSuccess;
     
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;
