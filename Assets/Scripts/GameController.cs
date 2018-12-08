@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 	private EntityManager manager;
 
 	private Dictionary<int, List<Entity>> fansPerLevel;
+	private List<Entity> interactableFans = new List<Entity>();
 
 	#endregion
 
@@ -79,13 +80,18 @@ public class GameController : MonoBehaviour
     
 	#region Public
 
-	public void AddNewFun(Entity fan, int level)
+	public void AddNewFun(Entity fan, int level, bool isInteractable)
 	{
 		if (!fansPerLevel.ContainsKey(level))
 		{
 			fansPerLevel.Add(level, new List<Entity>());
 		}
 		fansPerLevel[level].Add(fan);
+
+		if (isInteractable)
+		{
+			interactableFans.Add(fan);
+		}
 	}
 
 	public void SelectNewFan(int level)
