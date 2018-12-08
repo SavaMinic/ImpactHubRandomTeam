@@ -70,7 +70,7 @@ namespace RandomName.Wave
             private float normalDistribution(float value) {
                 float pi = 3.14f;
                 float e = 2.718f;
-                float sigmaSq = 5.0f;
+                float sigmaSq = 20.0f;
                 float mi = 1.0f;
                 return (1 / math.sqrt(2 * pi * sigmaSq)) * math.pow(e, -(math.pow(value - mi, 2) / (2 * sigmaSq)));
             }
