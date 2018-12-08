@@ -35,40 +35,63 @@ namespace RandomName.Wave
 	public class WaveSystem : JobComponentSystem
 	{
 
-		struct WavingFans
+		struct FansGroup
 		{
 			public readonly int Length;
 			public EntityArray Entities;
 			
 			public ComponentDataArray<WavingFan> Fans;
 		}
+
+		struct WavesGroup
+		{
+			public readonly int Length;
+			public EntityArray Entities;
+			
+			public ComponentDataArray<Wave> Waves;
+			public ComponentDataArray<Position> WavePositions;
+		}
 		
-		[Inject] private WavingFans fans;
+		[Inject] private FansGroup _fansGroup;
+		[Inject] private WavesGroup _wavesGroup;
 		
 		[BurstCompile]
 		struct WavingJob : IJobParallelFor
 		{
-			[ReadOnly] public EntityArray Entities;
-			public ComponentDataArray<WavingFan> WavingsFans;
-			public ComponentDataArray<WavingFan> Waves;
+			public ComponentDataArray<WavingFan> Fans;
+			public ComponentDataArray<Position> WavePositions;
             
 			public float deltaTime;
             
 			public void Execute(int index)
 			{
-				// TODO: calculate where is the wave
-				// TODO: calculate what is the amount of 
+				var fan = Fans[index];
+				var waveAmount = 0f;
+				for (int i = 0; i < WavePositions.Length; i++)
+				{
+					// TODO: CALCULATE MAXIMUM FOR EACH WAVE
+					waveAmount = 0.5f;
+				}
+				fan.Value = waveAmount;
+				Fans[index] = fan;
 			}
 		}
 		
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			if (fans.Length == 0)
+			if (_fansGroup.Length == 0)
 			{
 				return inputDeps;
 			}
 			
-			return base.OnUpdate(inputDeps);
+			var handle = new WavingJob
+			{
+				Fans = _fansGroup.Fans,
+				WavePositions = _wavesGroup.WavePositions,
+				// schedule it and say how many entities are there
+			}.Schedule(_fansGroup.Length, 32, inputDeps);
+			
+			return handle;
 		}
 	}
 
