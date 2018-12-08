@@ -12,7 +12,7 @@ public class BodySystem : JobComponentSystem {
     struct BodyJob : IJobProcessComponentData<Position, Body, WavingFan> {
 
         public void Execute(ref Position position, [ReadOnly]ref Body body, [ReadOnly]ref WavingFan wavingFan) {
-            position.Value.y = body.InitPosition.y + wavingFan.Value * 3f;
+            position.Value.y = body.InitPosition.y + wavingFan.Value * 100f;
         }
 
     }

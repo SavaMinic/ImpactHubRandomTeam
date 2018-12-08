@@ -67,11 +67,20 @@ namespace RandomName.Wave
             [ReadOnly] public ComponentDataArray<Position> WavePositions;
 			[ReadOnly] public ComponentDataArray<Position> FansPositions;
 
-			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition, int level)
+            private float normalDistribution(float value) {
+                float pi = 3.14f;
+                float e = 2.718f;
+                float sigmaSq = 5.0f;
+                float mi = 1.0f;
+                return (1 / math.sqrt(2 * pi * sigmaSq)) * math.pow(e, -(math.pow(value - mi, 2) / (2 * sigmaSq)));
+            }
+
+
+            private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition, int level)
 			{
                 float2 origin = math.distance(fanPosition.xz, float2.zero) * math.normalize(wavePosition.xz);
                 var distance = math.distance(origin, fanPosition.xz);
-                return math.unlerp(10f, 0f, distance);
+                return 1 - math.unlerp(10f, 0f, normalDistribution(distance));
                 //return (math.dot(math.normalize(wavePosition.xz), math.normalize(fanPosition.xz)) + 1) / 2;
             }
             
