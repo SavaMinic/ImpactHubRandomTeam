@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
 	private List<Entity> activeInteractibleFans = new List<Entity>();
 
 	private float timeToGenerateInteraction;
+	
+	private List<Entity> entitiesToRemove = new List<Entity>();
 
 	#endregion
 
@@ -83,6 +85,25 @@ public class GameController : MonoBehaviour
 		}
 		
 		// check activeInteractibleFans if they are ok
+		entitiesToRemove.Clear();
+		for (int i = 0; i < activeInteractibleFans.Count; i++)
+		{
+			var entity = activeInteractibleFans[i];
+			var haveWavePassed = manager.GetComponentData<InteractiveTag>(entity).WavePassed > 0;
+			if (haveWavePassed)
+			{
+				// FAIL
+				manager.SetComponentData(entity, new InteractiveTag { LookingForAttention = 0 });
+				entitiesToRemove.Add(entity);
+				// clear button for this entity
+				MainCanvas.I.ClearButton(entity);
+			}
+		}
+		// remove them from list
+		for (int i = 0; i < entitiesToRemove.Count; i++)
+		{
+			activeInteractibleFans.Remove(entitiesToRemove[i]);
+		}
 		
 		// is it time?
 		timeToGenerateInteraction -= Time.deltaTime / Time.timeScale;
@@ -97,7 +118,11 @@ public class GameController : MonoBehaviour
 				var isInteractive = manager.GetComponentData<InteractiveTag>(randomEntity).LookingForAttention > 0;
 				if (!isInteractive)
 				{
-					manager.SetComponentData(randomEntity, new InteractiveTag { LookingForAttention = 1 });
+					manager.SetComponentData(randomEntity, new InteractiveTag
+					{
+						LookingForAttention = 1,
+						IgnoreTime = GameSettings.I.InteractIgnoreTime
+					});
 					activeInteractibleFans.Add(randomEntity);
 					var pos = manager.GetComponentData<Position>(randomEntity).Value;
 					MainCanvas.I.ShowInteractButton(pos, randomEntity);

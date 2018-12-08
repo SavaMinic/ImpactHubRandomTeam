@@ -32,6 +32,7 @@ public class GameSettings : ScriptableObject
 
     [Header("Gameplay")]
     public float WavingFanAmountForSuccess;
+    public float InteractIgnoreTime;
     
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;
