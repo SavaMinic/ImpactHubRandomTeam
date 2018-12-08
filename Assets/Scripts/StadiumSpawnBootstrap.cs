@@ -49,7 +49,10 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
     public void InstantiateEntities(int level)
 	{
-		var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
+        Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentlevel + 1);
+        const float spread = 0.5f;
+
+        var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
 		var circleRadians = math.radians(360f);
 		
 		var armsOffset = new float3(0f, 1.2f, 0f);
@@ -62,7 +65,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 			for (float theta = 0; theta < circleRadians ; theta += dTheta)
 			{
 				var direction = new float3(math.sin(theta), 1, math.cos(theta));
-				var pos = radius * direction - new float3(0, startingHeight, 0);
+				var pos = radius * direction - new float3(0, startingHeight, 0) + random.NextFloat3(new float3(spread, spread, spread), new float3(-spread, -spread, -spread));
 				var rot = quaternion.LookRotation(-new float3(direction.x, 0f, direction.z), Up);
 				
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
