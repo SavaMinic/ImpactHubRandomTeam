@@ -6,7 +6,7 @@ using Unity.Entities;
 public struct Hands : IComponentData {
 
     public float3 InitPosition;
-    public float3 InitRotationEuler;
+    public quaternion InitRotationEuler;
 
 }
 
