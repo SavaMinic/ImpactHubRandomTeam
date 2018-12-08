@@ -62,8 +62,6 @@ namespace RandomName.Wave
 			public ComponentDataArray<WavingFan> Fans;
 			[ReadOnly] public ComponentDataArray<Position> WavePositions;
 			[ReadOnly] public ComponentDataArray<Position> FansPositions;
-            
-			public float deltaTime;
 
 			private float CalculateWaveToFanWavingAmount(float3 wavePosition, float3 fanPosition)
 			{
@@ -75,7 +73,7 @@ namespace RandomName.Wave
 			public void Execute(int index)
 			{
 				var fan = Fans[index];
-				var fanPosition = Fans[index].Value;
+				var fanPosition = FansPositions[index].Value;
 				var waveAmount = 0f;
 				// find maximum wave influence on fan
 				for (int i = 0; i < WavePositions.Length; i++)
