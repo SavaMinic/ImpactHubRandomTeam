@@ -13,7 +13,7 @@ public class GameSettings : ScriptableObject
         get
         {
             if (!_instance)
-                _instance = Resources.FindObjectsOfTypeAll<GameSettings>().FirstOrDefault();
+                _instance = Resources.Load<GameSettings>("GameSettings");
             return _instance;
         }
     }
