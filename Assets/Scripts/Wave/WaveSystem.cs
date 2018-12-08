@@ -23,6 +23,7 @@ namespace RandomName.Wave
 	public struct Wave : IComponentData
 	{
 		public float Angle;
+		public float3 Center;
 		
 		// what level of stadium
 		public int Level;
