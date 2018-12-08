@@ -3,12 +3,12 @@ using Unity.Mathematics;
 using Unity.Entities;
 
 [Serializable]
-public struct Hand : IComponentData {
+public struct Hands : IComponentData {
 
     public float3 InitPosition;
-    public float3 InitRotation;
+    public quaternion InitRotation;
 
 }
 
 [UnityEngine.DisallowMultipleComponent]
-public class HandComponent : ComponentDataWrapper<Hand> { }
+public class HandsComponent : ComponentDataWrapper<Hands> { }
