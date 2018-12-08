@@ -1,27 +1,14 @@
 fileFormatVersion: 2
-guid: 9588d53919806724db071fd4ea244f2c
+guid: 1239bcc9da6db6c4ebeddd9546c78998
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: char_arms
-    100002: char_body
-    100004: char_legs
-    100006: //RootNode
-    400000: char_arms
-    400002: char_body
-    400004: char_legs
-    400006: //RootNode
-    2100000: mat_skin
-    2100002: 'Material #53'
-    2300000: char_arms
-    2300002: char_body
-    2300004: char_legs
-    3300000: char_arms
-    3300002: char_body
-    3300004: char_legs
+    100000: //RootNode
+    400000: //RootNode
+    2100000: 'Material #53'
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: char_arms
-    4300002: char_body
-    4300004: char_legs
   externalObjects: {}
   materials:
     importMaterials: 0
