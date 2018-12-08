@@ -38,25 +38,12 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 		startingHeight = standsInnerRadius;
 	}
 
-	private void Start()
-	{
-		InstantiateEntities();
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			InstantiateEntities();
-		}
-	}
-
 	private static readonly float3 Up = new float3(0,1,0);
 	
     private int currentlevel = 0;
     private int count = 0;
 
-    public void InstantiateEntities()
+    public void InstantiateEntities(int level)
 	{
 		var dx = (standsOuterRadius -standsInnerRadius) / NumOfRows;
 		var circleRadians = math.radians(360f);
@@ -85,6 +72,8 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				entityManager.SetComponentData(armsEntity, new Rotation { Value = rot });
                 entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentlevel });
 
+				
+				GameController.I.AddNewFun(entity, level);
                 count += 2;
             }
 		}

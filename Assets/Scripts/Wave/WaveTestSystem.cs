@@ -47,6 +47,7 @@ namespace RandomName.Wave
                 return inputDeps;
             }
 			
+            /*
             var handle = new WavingTestJob
             {
                 Fans = _fansGroup.Fans,
@@ -55,6 +56,8 @@ namespace RandomName.Wave
             }.Schedule(_fansGroup.Length, 32, inputDeps);
 			
             return handle;
+            */
+            return inputDeps;
         }
     }
 }
