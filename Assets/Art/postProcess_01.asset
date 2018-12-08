@@ -14,7 +14,6 @@ MonoBehaviour:
   settings:
   - {fileID: 114672805520838524}
   - {fileID: 114477995363688270}
-  - {fileID: 114427570474346338}
   - {fileID: 114329973773268208}
   - {fileID: 114000084541000366}
   - {fileID: 114454833108763060}
@@ -65,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -81,33 +80,6 @@ MonoBehaviour:
   lumContrib:
     overrideState: 0
     value: 0.8
---- !u!114 &114427570474346338
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 0
-  focusDistance:
-    overrideState: 1
-    value: 92.74
-  aperture:
-    overrideState: 1
-    value: 0.1
-  focalLength:
-    overrideState: 1
-    value: 36
-  kernelSize:
-    overrideState: 0
-    value: 1
 --- !u!114 &114454833108763060
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -125,7 +97,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 8.98
+    value: 33.07
   threshold:
     overrideState: 0
     value: 1
@@ -171,10 +143,10 @@ MonoBehaviour:
     value: 1
   mode:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 0.72
+    value: 1.45
   color:
     overrideState: 1
     value: {r: 0.77254903, g: 0.23692532, b: 0.12941174, a: 1}
