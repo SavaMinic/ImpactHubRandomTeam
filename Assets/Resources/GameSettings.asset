@@ -27,6 +27,8 @@ MonoBehaviour:
   - 130
   - 140
   - 150
+  debug1: 5
+  debug2: 100
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000

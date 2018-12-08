@@ -10,18 +10,22 @@ using RandomName.Wave;
 public class LegsSystem : JobComponentSystem {
 
     [BurstCompile]
-    struct LegsJob : IJobProcessComponentData<Position, Rotation, Legs, WavingFan> {
+    struct LegsJob : IJobProcessComponentData<Position, Rotation, Legs, WavingFan>
+    {
 
-        public void Execute(ref Position position, ref Rotation rotation, [ReadOnly]ref Legs legs, [ReadOnly]ref WavingFan wavingFan) {
-            rotation.Value = quaternion.Euler(0, 0, wavingFan.Value);
-            position.Value.y = legs.InitPosition.y + wavingFan.Value + wavingFan.Value / 2;
-            position.Value.x = wavingFan.Value / 4;
+        public float debug1;
+        public float debug2;
+        public void Execute(ref Position position, ref Rotation rotation, [ReadOnly]ref Legs hands, [ReadOnly]ref WavingFan wavingFan)
+        {
+            position.Value.y = hands.InitPosition.y + wavingFan.Value * 100f;
+            rotation.Value = math.mul(hands.InitRotation,
+                quaternion.Euler(math.lerp(debug1, debug2, wavingFan.Value), 0, 0));
         }
 
     }
 
     protected override JobHandle OnUpdate(JobHandle inputDeps) {
-        var job = new LegsJob() { };
+        var job = new LegsJob() { debug1 = GameSettings.I.debug1, debug2 = GameSettings.I.debug2};
         return job.Schedule(this, inputDeps);
     }
 
