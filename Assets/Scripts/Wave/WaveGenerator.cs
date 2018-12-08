@@ -38,7 +38,7 @@ namespace RandomName.Wave
             manager = World.Active.GetOrCreateManager<EntityManager>();
 
             waveTestSystem = World.Active.GetExistingManager<WaveTestSystem>();
-            waveTestSystem.Enabled = true;
+            waveTestSystem.Enabled = false;
 
             for (int level = 0; level < 15; level++)
             {

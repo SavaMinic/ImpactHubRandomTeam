@@ -11,7 +11,8 @@ namespace RandomName.Wave
     {
         #region Public fields
 
-        public GameObject FanPrefab;
+        public GameObject FanArmsPrefab;
+        public GameObject FanBodyPrefab;
 
         #endregion
         
@@ -27,16 +28,25 @@ namespace RandomName.Wave
         public void AddFans(int amount, float baseRadius, float maxRange)
         {
             NativeArray<Entity> entities = new NativeArray<Entity>(amount, Allocator.Temp);
-            manager.Instantiate(FanPrefab, entities);
+            manager.Instantiate(FanArmsPrefab, entities);
+            
+            NativeArray<Entity> bodyEntities = new NativeArray<Entity>(amount, Allocator.Temp);
+            manager.Instantiate(FanBodyPrefab, bodyEntities);
 
             for (int i = 0; i < amount; i++)
             {
                 float xVal = baseRadius * Random.Range(-maxRange, maxRange);
                 float zVal = baseRadius * Random.Range(-maxRange, maxRange);
-                manager.SetComponentData(entities[i], new Position { Value = new float3(xVal, 0f, zVal) });
-                manager.SetComponentData(entities[i], new Scale { Value = new float3(1f, 1f, 1f) });
+                var pos = new float3(xVal, 0f, zVal);
+                
+                manager.SetComponentData(entities[i], new Position { Value = pos });
+                manager.SetComponentData(entities[i], new Hands() { InitPosition = pos });
+                
+                manager.SetComponentData(bodyEntities[i], new Position { Value = pos });
+                manager.SetComponentData(bodyEntities[i], new Body() { InitPosition = pos });
             }
             entities.Dispose();
+            bodyEntities.Dispose();
         }
     }
 }

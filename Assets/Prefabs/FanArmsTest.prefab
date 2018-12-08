@@ -20,12 +20,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4792219558602972}
   - component: {fileID: 114259109209696998}
+  - component: {fileID: 114479056196796930}
   - component: {fileID: 114717250698637684}
-  - component: {fileID: 114412640988890370}
-  - component: {fileID: 114232741038767794}
+  - component: {fileID: 114697599452476598}
   - component: {fileID: 114836755103989898}
+  - component: {fileID: 114232741038767794}
+  - component: {fileID: 114378267731410998}
   m_Layer: 0
-  m_Name: FanTest
+  m_Name: FanArmsTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,6 +58,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
+    StartPos:
+      x: 0
+      y: 0
+      z: 0
     Value: 0
 --- !u!114 &114259109209696998
 MonoBehaviour:
@@ -68,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114412640988890370
+--- !u!114 &114378267731410998
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,9 +87,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedData:
     Value:
-      x: 1
-      y: 1
-      z: 1
+      x: 5
+      y: 5
+      z: 5
+--- !u!114 &114479056196796930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344174612019594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855b0343d1a7cc44db625d4726556e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    InitPosition:
+      x: 0
+      y: 0
+      z: 0
+    InitRotation:
+      value:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+--- !u!114 &114697599452476598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344174612019594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345a91954f2ba4779ae83b4fcf75bef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      value:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
 --- !u!114 &114717250698637684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedData:
     Value:
-      x: 10
+      x: 0
       y: 0
       z: 0
 --- !u!114 &114836755103989898
@@ -112,8 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
-    mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-    material: {fileID: 2100000, guid: 5d6acf84e259e4a7893d6d987a3500d3, type: 2}
+    mesh: {fileID: 4300000, guid: 9588d53919806724db071fd4ea244f2c, type: 3}
+    material: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
     subMesh: 0
     castShadows: 0
     receiveShadows: 0
