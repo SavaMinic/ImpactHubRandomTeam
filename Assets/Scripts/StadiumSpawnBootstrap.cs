@@ -70,7 +70,8 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 			for (float theta = 0; theta < circleRadians ; theta += dTheta)
 			{
 				var direction = new float3(math.sin(theta), 0.68f, math.cos(theta));
-				var pos = (radius + 0.3f * level) * direction - new float3(0, startingHeight, 0); //+ random.NextFloat3(new float3(spread, 0, spread), new float3(-spread, -0, -spread));
+				var pos = (radius + 0.3f * level) * direction - new float3(0, startingHeight, 0) +
+				          random.NextFloat3(new float3(spread, spread, spread), new float3(-spread, -0, -spread));
 				var rot = quaternion.LookRotation(-new float3(direction.x, 0f, direction.z), Up);
 				
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
