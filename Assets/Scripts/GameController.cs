@@ -120,6 +120,7 @@ public class GameController : MonoBehaviour
 		{
 			manager.SetComponentData(activeInteractibleFans[i], new InteractiveTag { LookingForAttention = 0 });
 		}
+		activeInteractibleFans.Clear();
 		MainCanvas.I.ClearAllInteractible();
 	}
 
