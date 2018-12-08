@@ -738,7 +738,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1874427460414844}
-  m_LocalRotation: {x: 0.70090926, y: -8.4287285e-16, z: -8.238929e-15, w: 0.7132505}
+  m_LocalRotation: {x: 0.70090926, y: -8.428917e-16, z: -8.238929e-15, w: 0.7132505}
   m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -850,7 +850,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1259533991704062}
   m_LocalRotation: {x: 0.16292073, y: -0, z: -0, w: 0.9866392}
-  m_LocalPosition: {x: 0, y: 10.42, z: 7.09}
+  m_LocalPosition: {x: 0, y: 9.86, z: 8.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4100485170925786}
@@ -863,14 +863,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090917752640348}
-  m_LocalRotation: {x: 0.085059844, y: -0, z: -0, w: 0.99637586}
-  m_LocalPosition: {x: 0, y: 3.08, z: 13.87}
+  m_LocalRotation: {x: 0.13777629, y: -0, z: -0, w: 0.99046344}
+  m_LocalPosition: {x: 0, y: 4.45, z: 14.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4900748036677160}
   m_Father: {fileID: 4337135835252062}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 9.759001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.838, y: 0, z: 0}
 --- !u!4 &4966109265459728
 Transform:
   m_ObjectHideFlags: 1
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1126,12 +1126,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1773756224325906}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 0}
+  volumeTrigger: {fileID: 4125179690338808}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1773756224325906}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 55
+    FieldOfView: 60
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
