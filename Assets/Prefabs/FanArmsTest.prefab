@@ -58,10 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
-    StartPos:
-      x: 0
-      y: 0
-      z: 0
     Value: 0
 --- !u!114 &114259109209696998
 MonoBehaviour:
@@ -158,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
-    mesh: {fileID: 4300000, guid: 9588d53919806724db071fd4ea244f2c, type: 3}
+    mesh: {fileID: 4300000, guid: 1239bcc9da6db6c4ebeddd9546c78998, type: 3}
     material: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
     subMesh: 0
     castShadows: 0
