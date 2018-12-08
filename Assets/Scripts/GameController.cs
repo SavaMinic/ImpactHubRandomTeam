@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using RandomName.UI;
 using RandomName.Wave;
 using Unity.Collections;
 using Unity.Entities;
@@ -23,6 +24,9 @@ public class GameController : MonoBehaviour
 
 	private Dictionary<int, List<Entity>> fansPerLevel;
 	private List<Entity> interactableFans = new List<Entity>();
+	private List<Entity> activeInteractibleFans = new List<Entity>();
+
+	private float timeToGenerateInteraction;
 
 	#endregion
 
@@ -52,6 +56,7 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		timeToGenerateInteraction = GameSettings.I.StartTimeToGenerateInteraction;
 		manager = World.Active.GetOrCreateManager<EntityManager>();
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(0);
 		CameraController.I.OverviewCam(MaxLevel);
@@ -73,12 +78,50 @@ public class GameController : MonoBehaviour
 			MaxLevel++;
 			StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
 			CameraController.I.OverviewCam(MaxLevel);
+			ClearAllInteractible();
+			timeToGenerateInteraction = GameSettings.I.StartTimeToGenerateInteraction;
+		}
+		
+		// is it time?
+		timeToGenerateInteraction -= Time.deltaTime / Time.timeScale;
+		if (timeToGenerateInteraction <= 0 && activeInteractibleFans.Count < GameSettings.I.MaxInteractionAtOnce)
+		{
+			timeToGenerateInteraction = GameSettings.I.TimeToGenerateInteraction;
+			// generate new interactions
+			var cnt = GameSettings.I.GetInteractionCountPerLevel(MaxLevel);
+			for (int i = 0; i < cnt; i++)
+			{
+				var randomEntity = interactableFans[Random.Range(0, interactableFans.Count)];
+				var isInteractive = manager.GetComponentData<InteractiveTag>(randomEntity).LookingForAttention > 0;
+				if (!isInteractive)
+				{
+					manager.SetComponentData(randomEntity, new InteractiveTag { LookingForAttention = 1 });
+					activeInteractibleFans.Add(randomEntity);
+					var pos = manager.GetComponentData<Position>(randomEntity).Value;
+					MainCanvas.I.ShowInteractButton(pos, randomEntity);
+				}
+			}
 		}
 	}
 
 	#endregion
     
 	#region Public
+
+	public void FanInteracted(Entity entity)
+	{
+		activeInteractibleFans.Remove(entity);
+		manager.SetComponentData(entity, new InteractiveTag { LookingForAttention = 0 });
+	}
+
+	public void ClearAllInteractible()
+	{
+		for (int i = 0; i < activeInteractibleFans.Count; i++)
+		{
+			manager.SetComponentData(activeInteractibleFans[i], new InteractiveTag { LookingForAttention = 0 });
+		}
+		MainCanvas.I.ClearAllInteractible();
+	}
 
 	public void AddNewFun(Entity fan, int level, bool isInteractable)
 	{
@@ -100,7 +143,7 @@ public class GameController : MonoBehaviour
 			return;
 
 		var fans = fansPerLevel[level];
-		SelectedFan = fans[UnityEngine.Random.Range(0, fans.Count)];
+		SelectedFan = fans[Random.Range(0, fans.Count)];
 
 		var position = manager.GetComponentData<Position>(SelectedFan).Value;
 		CameraController.I.FocusOnFan(position, MaxLevel);

@@ -4,7 +4,7 @@ using Unity.Entities;
 [Serializable]
 public struct InteractiveTag : IComponentData
 {
-    
+    public int LookingForAttention;
 }
 
 [UnityEngine.DisallowMultipleComponent]
