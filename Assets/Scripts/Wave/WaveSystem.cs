@@ -24,6 +24,7 @@ namespace RandomName.Wave
 	{
 		public float Angle;
 		public float3 Center;
+		public float Radius;
 		
 		// what level of stadium
 		public int Level;
