@@ -76,13 +76,14 @@ GameObject:
   - component: {fileID: 222679737111452690}
   - component: {fileID: 114301567573995624}
   - component: {fileID: 114487313462343736}
+  - component: {fileID: 225257688790803092}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1281443440110952
 GameObject:
   m_ObjectHideFlags: 1
@@ -1239,6 +1240,17 @@ CanvasGroup:
   m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225257688790803092
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1271793492435436}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!225 &225820104689042176
 CanvasGroup:

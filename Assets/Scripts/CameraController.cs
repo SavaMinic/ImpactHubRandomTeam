@@ -17,6 +17,9 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera fanCam;
     public List<CinemachineVirtualCamera> overviewCams;
 
+    public CinemachineVirtualCamera dollyTrackCam;
+    public AnimationCurve dollyTrackCurve;
+
     #endregion
     
     #region Mono
@@ -27,6 +30,19 @@ public class CameraController : MonoBehaviour
         SetActiveCamera(overviewCams[0]);
     }
 
+    private void Update()
+    {
+        if (!Application.isPlaying)
+            return;
+
+        if (dollyTrackCam.Priority == 100)
+        {
+            var path = dollyTrackCurve.Evaluate(Time.time % 20f);
+            dollyTrackCam.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = path;
+        }
+        
+    }
+
     #endregion
     
     #region Public
@@ -34,7 +50,7 @@ public class CameraController : MonoBehaviour
     
     public void EndGame(bool isWon)
     {
-        SetActiveCamera(fanCam);
+        SetActiveCamera(dollyTrackCam);
     }
 
     public void OverviewCam(int level)
@@ -50,6 +66,7 @@ public class CameraController : MonoBehaviour
     private void SetActiveCamera(CinemachineVirtualCamera cam)
     {
         fanCam.Priority = cam == fanCam ? 100 : 1;
+        dollyTrackCam.Priority = cam == dollyTrackCam ? 100 : 1;
         for (int i = 0; i < overviewCams.Count; i++)
         {
             overviewCams[i].Priority = cam == overviewCams[i] ? 100 : 1;

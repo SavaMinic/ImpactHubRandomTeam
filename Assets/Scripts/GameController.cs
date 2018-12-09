@@ -37,6 +37,9 @@ public class GameController : MonoBehaviour
 
 	private float enableEndGameTime = 2f;
 
+	public GameObject stadium1;
+	public GameObject stadium2;
+
 	#endregion
 
 	#region Properties
@@ -115,6 +118,9 @@ public class GameController : MonoBehaviour
 
 		IsRunning = true;
 		CurrentScore = 0;
+		
+		stadium1.SetActive(!GameSettings.I.DemoMode);
+		stadium2.SetActive(GameSettings.I.DemoMode);
 	}
 	
 	private void OnDestroy()

@@ -60,14 +60,11 @@ namespace RandomName.UI
             progressImage.sizeDelta = new Vector2(0f, progressImage.sizeDelta.y);
 
             var isDemo = GameSettings.I.DemoMode;
-            skipButton.gameObject.SetActive(isDemo);
-            if (isDemo)
+            skipButton.GetComponent<CanvasGroup>().alpha = isDemo ? 1f : 0.05f;
+            skipButton.onClick.AddListener(() =>
             {
-                skipButton.onClick.AddListener(() =>
-                {
-                    GameController.I.SkipLevel();
-                });
-            }
+                GameController.I.SkipLevel();
+            });
         }
 
         void Start()
@@ -87,8 +84,11 @@ namespace RandomName.UI
 
         public void EndGame(bool isWon)
         {
-            winGroup.alpha = isWon ? 1f : 0;
-            loseGroup.alpha = isWon ? 0f : 1f;
+            if (!GameSettings.I.DemoMode)
+            {
+                winGroup.alpha = isWon ? 1f : 0;
+                loseGroup.alpha = isWon ? 0f : 1f;
+            }
             ClearAllInteractible(true);
         }
 

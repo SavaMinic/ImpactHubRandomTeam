@@ -40,12 +40,14 @@ public class MainMenuController : MonoBehaviour
 	private void OnStartClicked()
 	{
 		GameSettings.I.DemoMode = false;
+		GameSettings.I.MaxLevel = 7;
 		SceneManager.LoadScene("GameScene");
 	}
 
 	private void OnDemoClicked()
 	{
 		GameSettings.I.DemoMode = true;
+		GameSettings.I.MaxLevel = 12;
 		SceneManager.LoadScene("GameScene");
 	}
 
