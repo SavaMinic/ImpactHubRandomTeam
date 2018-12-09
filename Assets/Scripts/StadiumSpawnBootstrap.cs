@@ -23,7 +23,6 @@ public class StadiumSpawnBootstrap : MonoBehaviour
     [SerializeField]
     private GameObject seatPrefab;
 
-    public Material material1;
     public Color[] emmisionColors;
 
     private MeshInstanceRendererComponent[] Meshes;
@@ -50,42 +49,43 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 	
 	private List<MeshInstanceRenderingInfo> RenderComponents = new List<MeshInstanceRenderingInfo>();
 	
+    void init() {
+        Instance = this; // worst singleton ever but it works
+
+        entityManager = World.Active.GetExistingManager<EntityManager>();
+        startingHeight = 14f;
+        transform = entityManager.CreateEntity(typeof(Position), typeof(Rotation));
+
+        var armMesh = GameSettings.I.Arms;
+        var bodyMesh = GameSettings.I.Body;
+        var legsMesh = GameSettings.I.Legs;
+        var materials = GameSettings.I.Materials;
+
+        RenderComponents.Clear();
+
+        for (int i = 0; i < materials.Length; i++) {
+            RenderComponents.Add(
+                new MeshInstanceRenderingInfo() {
+
+                    Legs = new MeshInstanceRenderer() {
+                        mesh = legsMesh,
+                        material = Instantiate(materials[i])
+                    },
+                    Arms = new MeshInstanceRenderer() {
+                        mesh = armMesh,
+                        material = Instantiate(materials[i])
+                    }, Body = new MeshInstanceRenderer() {
+                        mesh = Instantiate(bodyMesh),
+                        material = Instantiate(materials[i])
+                    },
+                }
+            );
+        }
+    }
+
 	public void Awake()
 	{
-		Instance = this; // worst singleton ever but it works
-		
-		entityManager = World.Active.GetExistingManager<EntityManager>();
-		startingHeight = 14f;
-		transform = entityManager.CreateEntity(typeof(Position), typeof(Rotation));
-
-		var armMesh = GameSettings.I.Arms;
-		var bodyMesh = GameSettings.I.Body;
-		var legsMesh = GameSettings.I.Legs;
-		var materials = GameSettings.I.Materials;
-
-		for (int i = 0; i < materials.Length; i++)
-		{
-			RenderComponents.Add(
-				new MeshInstanceRenderingInfo()
-				{
-					
-					Legs = new MeshInstanceRenderer()
-					{
-						mesh = legsMesh,
-						material = Instantiate(materials[i])
-					},
-					Arms = new MeshInstanceRenderer()
-					{
-						mesh = armMesh,
-						material = Instantiate(materials[i])
-					},Body = new MeshInstanceRenderer()
-					{
-						mesh = Instantiate(bodyMesh),
-						material = Instantiate(materials[i])
-					},
-				}
-			);
-		}
+        init();
 	}
 
 	private static readonly float3 Up = new float3(0,1,0);
@@ -95,6 +95,13 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
     public void InstantiateEntities(int level)
 	{
+        Material[] materials = GameSettings.I.Materials;
+        foreach (Material material in materials) {
+            material.SetColor("_EmissionColor", emmisionColors[currentLevel]);
+        }
+
+        init();
+
         Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentLevel + 1);
         const float spread = 0.5f;
 
@@ -155,8 +162,6 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				entityManager.SetComponentData(legEntity, new WavingFan { Level = currentLevel });
 				entityManager.SetComponentData(legEntity, new Scale {Value = new float3(5, 5, 5)});
 				entityManager.SetSharedComponentData(legEntity, RenderComponents[randomIndex].Legs);
-
-                material1.SetColor("_EmissionColor", emmisionColors[currentLevel]);
 
                 GameController.I.AddNewFun(entity, level, isInteractable);
                 count += 4;
