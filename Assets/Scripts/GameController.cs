@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using RandomName.Interactive;
 using RandomName.UI;
 using RandomName.Wave;
 using Unity.Collections;
@@ -101,6 +102,8 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		I = this;
+		
+		EnableStartingSystems();
 	}
 
 	private void Start()
@@ -214,6 +217,27 @@ public class GameController : MonoBehaviour
 		IsRunning = false;
 		MainCanvas.I.EndGame(isWon);
 		CameraController.I.EndGame(isWon);
+		DisableAllSystems();
+	}
+
+	private void DisableAllSystems()
+	{
+		World.Active.GetExistingManager<WaveMovementSystem>().Enabled = false;
+		World.Active.GetExistingManager<WaveSystem>().Enabled = false;
+		World.Active.GetExistingManager<WaveReachingTopSystem>().Enabled = false;
+		World.Active.GetExistingManager<GenerateInteractiveSystem>().Enabled = false;
+		
+		World.Active.GetExistingManager<GameOutroSystem>().Enabled = true;
+	}
+	
+	private void EnableStartingSystems()
+	{
+		World.Active.GetExistingManager<WaveMovementSystem>().Enabled = true;
+		World.Active.GetExistingManager<WaveSystem>().Enabled = true;
+		World.Active.GetExistingManager<WaveReachingTopSystem>().Enabled = true;
+		World.Active.GetExistingManager<GenerateInteractiveSystem>().Enabled = true;
+		
+		World.Active.GetExistingManager<GameOutroSystem>().Enabled = false;
 	}
 
 	public void ProgressToNextLevel()
