@@ -57,9 +57,14 @@ public class GameController : MonoBehaviour
 			if (currentScore >= ScoreForNextLevel)
 			{
 				ProgressToNextLevel();
+				currentScore = 0;
+				MainCanvas.I.RefreshProgressBarToEnd();
 			}
-			var progress = currentScore / ScoreForNextLevel;
-			MainCanvas.I.RefreshProgressBar(progress);
+			else
+			{
+				var progress = currentScore / ScoreForNextLevel;
+				MainCanvas.I.RefreshProgressBar(progress);
+			}
 		}
 	}
 	
@@ -99,6 +104,7 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
             ProgressToNextLevel();
+			CurrentScore = 0f;
 		}
 		
 		// check activeInteractibleFans if they are ok
@@ -162,7 +168,6 @@ public class GameController : MonoBehaviour
 		if (MaxLevel >= 7)
 			return;
 		
-		currentScore = 0;
 		MaxLevel++;
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
 		CameraController.I.OverviewCam(MaxLevel);

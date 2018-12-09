@@ -47,7 +47,7 @@ namespace RandomName.UI
             var button = Instantiate(bubblePrefab);
             Destroy(button.gameObject);
 
-            progressMaxWidth = progressImage.sizeDelta.x;
+            progressMaxWidth = 790f;
             progressImage.sizeDelta = new Vector2(0f, progressImage.sizeDelta.y);
         }
 
@@ -59,6 +59,19 @@ namespace RandomName.UI
         #endregion
 
         #region Public
+
+        public void RefreshProgressBarToEnd()
+        {
+            if (progressAnimation != null)
+            {
+                StopCoroutine(progressAnimation);
+            }
+            progressAnimation = ProgressAnimation(progressMaxWidth, progressDuration, () =>
+            {
+                progressImage.sizeDelta = new Vector2(0f, progressImage.sizeDelta.y);
+            }, 0.4f);
+            StartCoroutine(progressAnimation);
+        }
 
         public void RefreshProgressBar(float progress)
         {
@@ -123,7 +136,7 @@ namespace RandomName.UI
 
         #region Private
 
-        private IEnumerator ProgressAnimation(float endWidth, float duration)
+        private IEnumerator ProgressAnimation(float endWidth, float duration, Action callBack = null, float callbackDelay = 0f)
         {
             var size = progressImage.sizeDelta;
             var startWidth = size.x;
@@ -134,6 +147,12 @@ namespace RandomName.UI
                 progressImage.sizeDelta = size;
                 yield return null;
             }
+
+            if (callbackDelay > 0)
+            {
+                yield return new WaitForSecondsRealtime(callbackDelay);
+            }
+            callBack?.Invoke();
         }
 
         #endregion
