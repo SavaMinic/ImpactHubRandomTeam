@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 114478679651365864, guid: ddb6aaededf6e42cf87db9d5fc92e250,
     type: 2}
+  backImage: {fileID: 114473916111978242}
   progressImage: {fileID: 224891055294889218}
   progressIncreaseImage: {fileID: 224312099319187256}
   progressDecreaseImage: {fileID: 224823696355318324}

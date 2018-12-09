@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RandomName.UI
 {
@@ -16,6 +17,7 @@ namespace RandomName.UI
         
         public InteractButton bubblePrefab;
 
+        public Image backImage;
         public RectTransform progressImage;
         public RectTransform progressIncreaseImage;
         public RectTransform progressDecreaseImage;
@@ -90,6 +92,12 @@ namespace RandomName.UI
             }
             progressAnimation = ProgressAnimation(progress * progressMaxWidth, progressDuration);
             StartCoroutine(progressAnimation);
+        }
+
+        public void RefreshConsecutiveErrorCount(int errorCnt)
+        {
+            var errors = (float)errorCnt / GameSettings.I.MaxConsecutiveErrors;
+            backImage.color = Color.Lerp(Color.white, Color.red, errors);
         }
 
         public void ShowInteractButton(Vector3 entityPos, Entity entity, int level)

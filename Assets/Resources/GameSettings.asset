@@ -53,6 +53,7 @@ MonoBehaviour:
   - 25
   - 35
   - 45
+  MaxConsecutiveErrors: 3
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000

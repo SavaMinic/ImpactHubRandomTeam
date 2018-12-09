@@ -57,6 +57,16 @@ MonoBehaviour:
   fanLegPrefab: {fileID: 1984984614332514, guid: 2ade6feb580a29445b5edf0f7e9ffa80,
     type: 2}
   seatPrefab: {fileID: 1243142092261498, guid: c17f7a910decc164abeed15d006d44df, type: 2}
+  material1: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
+  emmisionColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   NumberOfObjectsInCircle: 3
   NumOfRows: 5
   standsInnerRadius: 20

@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
 
 	private float currentScore;
 
+	private int consecutiveErrorCount;
+
 	#endregion
 
 	#region Properties
@@ -63,6 +65,20 @@ public class GameController : MonoBehaviour
 			{
 				var progress = currentScore / ScoreForNextLevel;
 				MainCanvas.I.RefreshProgressBar(progress);
+			}
+		}
+	}
+
+	private int ConsecutiveErrorCount
+	{
+		get { return consecutiveErrorCount; }
+		set
+		{
+			consecutiveErrorCount = value;
+			MainCanvas.I.RefreshConsecutiveErrorCount(consecutiveErrorCount);
+			if (consecutiveErrorCount == GameSettings.I.MaxConsecutiveErrors)
+			{
+				EndGame(false);
 			}
 		}
 	}
@@ -119,6 +135,7 @@ public class GameController : MonoBehaviour
 				// clear button for this entity
 				MainCanvas.I.ClearButton(entity);
 				CurrentScore += GameSettings.I.DecreaseForFailure;
+				ConsecutiveErrorCount++;
 			}
 		}
 		// remove them from list
@@ -192,11 +209,13 @@ public class GameController : MonoBehaviour
 		{
 			// SUCCESS
 			CurrentScore += GameSettings.I.IncreaseForSuccess;
+			ConsecutiveErrorCount = 0;
 		}
 		else
 		{
 			// FAIL
 			CurrentScore += GameSettings.I.DecreaseForMiss;
+			ConsecutiveErrorCount++;
 		}
 		activeInteractibleFans.Remove(entity);
 		manager.SetComponentData(entity, new InteractiveTag { LookingForAttention = 0 });
