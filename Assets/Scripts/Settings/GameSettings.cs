@@ -17,7 +17,9 @@ public class GameSettings : ScriptableObject
             return _instance;
         }
     }
-    
+
+    public int MaxLevel;
+
     #endregion
 
     public List<float> RadiusPerLevel;

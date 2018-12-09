@@ -243,7 +243,7 @@ public class GameController : MonoBehaviour
 
 	public void ProgressToNextLevel()
 	{
-		if (MaxLevel >= 7)
+		if (MaxLevel >= GameSettings.I.MaxLevel)
 		{
 			EndGame(true);
 			return;
