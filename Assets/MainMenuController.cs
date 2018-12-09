@@ -17,6 +17,7 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField] private Button backButtons;
 	[SerializeField] private Outline titleTextOutline;
 	[SerializeField] private List<Color> titleColors;
+	[SerializeField] private float titleTextAnimationDuration;
 
 	private int titleColorIndex;
 	
@@ -29,6 +30,11 @@ public class MainMenuController : MonoBehaviour
 		creditsButton.onClick.AddListener(OnCreditsClicked);
 		exitButton.onClick.AddListener(OnExitClicked);
 		backButtons.onClick.AddListener(() => SetActiveMainMenuCanvas(true));
+	}
+
+	private void Start()
+	{
+		StartCoroutine(DoTitleAnimation());
 	}
 
 	private void OnStartClicked()
@@ -58,5 +64,20 @@ public class MainMenuController : MonoBehaviour
 		mainMenuCanvas.alpha = active ? 1f : 0f;
 		creditsCanvas.alpha = active ? 0f : 1f;
 		backButtons.gameObject.SetActive(!active);
+	}
+
+	private IEnumerator DoTitleAnimation()
+	{
+		while (true)
+		{
+			var startColor = titleColors[titleColorIndex];
+			titleColorIndex = (titleColorIndex + 1) % titleColors.Count;
+			var endColor = titleColors[titleColorIndex];
+			for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / titleTextAnimationDuration)
+			{
+				titleTextOutline.effectColor = Color.Lerp(startColor, endColor, t);
+				yield return null;
+			}
+		}
 	}
 }
