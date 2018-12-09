@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour
 	
 	private void OnDestroy()
 	{
+		if (World.Active == null) return;
 		var entityManager = World.Active.GetOrCreateManager<EntityManager>();
 		var entityArray = entityManager.GetAllEntities();
 		foreach (var e in entityArray)
