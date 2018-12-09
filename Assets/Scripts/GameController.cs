@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
 	
 	private EntityManager manager;
 
-	private Dictionary<int, List<Entity>> fansPerLevel;
 	private List<Entity> interactableFans = new List<Entity>();
 	private List<Entity> activeInteractibleFans = new List<Entity>();
 
@@ -68,6 +67,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 	
+	public bool IsRunning { get; private set; }
+	
 	private float ScoreForNextLevel => GameSettings.I.GetScorePerLevel(MaxLevel);
 
 	#endregion
@@ -77,7 +78,6 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		I = this;
-		fansPerLevel = new Dictionary<int, List<Entity>>();
 	}
 
 	private void Start()
@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(0);
 		CameraController.I.OverviewCam(MaxLevel);
 
+		IsRunning = true;
 		CurrentScore = 0;
 	}
 
@@ -95,11 +96,8 @@ public class GameController : MonoBehaviour
 		if (!Application.isPlaying)
 			return;
 
-		if (Input.GetKeyDown(KeyCode.Q))
-		{
-			var midLevel = Mathf.FloorToInt(MaxLevel / 2f);
-			SelectNewFan(midLevel);
-		}
+		if (!IsRunning)
+			return;
 		
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -163,10 +161,20 @@ public class GameController : MonoBehaviour
     
 	#region Public
 
+	public void EndGame(bool isWon)
+	{
+		IsRunning = false;
+		MainCanvas.I.EndGame(isWon);
+		CameraController.I.EndGame(isWon);
+	}
+
 	public void ProgressToNextLevel()
 	{
 		if (MaxLevel >= 7)
+		{
+			EndGame(true);
 			return;
+		}
 		
 		MaxLevel++;
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
@@ -206,28 +214,10 @@ public class GameController : MonoBehaviour
 
 	public void AddNewFun(Entity fan, int level, bool isInteractable)
 	{
-		if (!fansPerLevel.ContainsKey(level))
-		{
-			fansPerLevel.Add(level, new List<Entity>());
-		}
-		fansPerLevel[level].Add(fan);
-
 		if (isInteractable)
 		{
 			interactableFans.Add(fan);
 		}
-	}
-
-	public void SelectNewFan(int level)
-	{
-		if (!fansPerLevel.ContainsKey(level) || fansPerLevel[level].Count == 0)
-			return;
-
-		var fans = fansPerLevel[level];
-		SelectedFan = fans[Random.Range(0, fans.Count)];
-
-		var position = manager.GetComponentData<Position>(SelectedFan).Value;
-		CameraController.I.FocusOnFan(position, MaxLevel);
 	}
 
 	#endregion

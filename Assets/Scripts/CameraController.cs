@@ -17,11 +17,6 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera fanCam;
     public List<CinemachineVirtualCamera> overviewCams;
 
-    public Transform camTarget;
-
-    public float verticalDiffPerLevel = 5f;
-    public float horizontalDiffPerLevel = 8f;
-
     #endregion
     
     #region Mono
@@ -36,13 +31,10 @@ public class CameraController : MonoBehaviour
     
     #region Public
 
-    public void FocusOnFan(float3 pos, int level)
+    
+    public void EndGame(bool isWon)
     {
         SetActiveCamera(fanCam);
-        camTarget.position = pos;
-        fanCam.transform.position = Vector3.up * (pos.y + verticalDiffPerLevel * (level + 1));
-        // go back a little
-        fanCam.transform.position -= new Vector3(pos.x, 0f, pos.z).normalized * (level * horizontalDiffPerLevel);
     }
 
     public void OverviewCam(int level)

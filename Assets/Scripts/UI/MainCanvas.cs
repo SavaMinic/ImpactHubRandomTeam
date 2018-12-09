@@ -26,6 +26,9 @@ namespace RandomName.UI
         public AnimationCurve progressAnimationCurve;
         public float progressDuration;
 
+        public CanvasGroup winGroup;
+        public CanvasGroup loseGroup;
+
         [Serializable]
         private class ButtonWithEntity
         {
@@ -59,6 +62,12 @@ namespace RandomName.UI
         #endregion
 
         #region Public
+
+        public void EndGame(bool isWon)
+        {
+            winGroup.alpha = isWon ? 1f : 0;
+            loseGroup.alpha = isWon ? 0f : 1f;
+        }
 
         public void RefreshProgressBarToEnd()
         {
