@@ -33,6 +33,8 @@ namespace RandomName.UI
 
         public Button skipButton;
 
+        public Text FPSCounter;
+
         [Serializable]
         private class ButtonWithEntity
         {
@@ -71,6 +73,12 @@ namespace RandomName.UI
         void Start()
         {
             mainCamera = Camera.main;
+        }
+
+
+        private void Update()
+        {
+            FPSCounter.text = (1 / Time.deltaTime).ToString("##");
         }
 
         #endregion
