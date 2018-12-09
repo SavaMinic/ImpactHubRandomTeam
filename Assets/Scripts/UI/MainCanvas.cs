@@ -81,6 +81,7 @@ namespace RandomName.UI
         {
             winGroup.alpha = isWon ? 1f : 0;
             loseGroup.alpha = isWon ? 0f : 1f;
+            ClearAllInteractible(true);
         }
 
         public void RefreshProgressBarToEnd()

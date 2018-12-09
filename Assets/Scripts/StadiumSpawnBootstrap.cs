@@ -85,6 +85,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
 	public void Awake()
 	{
+		currentLevel = 0;
         init();
 	}
 

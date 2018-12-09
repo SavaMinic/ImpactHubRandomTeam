@@ -896,6 +896,11 @@ MonoBehaviour:
   creditsButton: {fileID: 1448887779}
   exitButton: {fileID: 1161100508}
   backButtons: {fileID: 2113316043}
+  titleTextOutline: {fileID: 796645702}
+  titleColors:
+  - {r: 0.94940495, g: 0.504717, b: 1, a: 0.5}
+  - {r: 0.5341702, g: 1, b: 0.5058824, a: 0.5}
+  - {r: 0.5058824, g: 0.801911, b: 1, a: 0.5}
 --- !u!114 &885277390
 MonoBehaviour:
   m_ObjectHideFlags: 0

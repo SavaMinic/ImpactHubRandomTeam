@@ -57,17 +57,16 @@ MonoBehaviour:
   fanLegPrefab: {fileID: 1984984614332514, guid: 2ade6feb580a29445b5edf0f7e9ffa80,
     type: 2}
   seatPrefab: {fileID: 1243142092261498, guid: c17f7a910decc164abeed15d006d44df, type: 2}
-  material1: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
   emmisionColors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  NumberOfObjectsInCircle: 3
-  NumOfRows: 5
+  - {r: 0.4, g: 0.4, b: 0.4, a: 1}
+  - {r: 0.45, g: 0.45, b: 0.45, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.55, g: 0.55, b: 0.55, a: 1}
+  - {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  - {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  - {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  - {r: 0.75, g: 0.75, b: 0.75, a: 1}
+  NumberOfObjectsInCircle: 5
+  NumOfRows: 7
   standsInnerRadius: 20
   standsOuterRadius: 30

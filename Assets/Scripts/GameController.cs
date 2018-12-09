@@ -7,6 +7,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
 	private float currentScore;
 
 	private int consecutiveErrorCount;
+
+	private float enableEndGameTime = 2f;
 
 	#endregion
 
@@ -110,6 +113,15 @@ public class GameController : MonoBehaviour
 		IsRunning = true;
 		CurrentScore = 0;
 	}
+	
+	private void OnDestroy()
+	{
+		var entityManager = World.Active.GetOrCreateManager<EntityManager>();
+		var entityArray = entityManager.GetAllEntities();
+		foreach (var e in entityArray)
+			entityManager.DestroyEntity(e);
+		entityArray.Dispose();
+	}
 
 	private void Update()
 	{
@@ -117,7 +129,17 @@ public class GameController : MonoBehaviour
 			return;
 
 		if (!IsRunning)
+		{
+			enableEndGameTime -= Time.deltaTime / Time.timeScale;
+			if (enableEndGameTime > 0)
+				return;
+			
+			if (Input.anyKeyDown)
+			{
+				SceneManager.LoadScene("MainMenu");
+			}
 			return;
+		}
 		
 		if (Input.GetKeyDown(KeyCode.Space))
 		{

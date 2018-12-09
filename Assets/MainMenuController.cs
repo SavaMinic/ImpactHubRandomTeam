@@ -15,6 +15,10 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField] private Button creditsButton;
 	[SerializeField] private Button exitButton;
 	[SerializeField] private Button backButtons;
+	[SerializeField] private Outline titleTextOutline;
+	[SerializeField] private List<Color> titleColors;
+
+	private int titleColorIndex;
 	
 	private void Awake()
 	{

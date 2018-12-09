@@ -30,7 +30,7 @@ MonoBehaviour:
   debug1: 4.6
   debug2: 100
   WavingFanAmountForSuccess: 0.2
-  InteractIgnoreTime: 1.5
+  InteractIgnoreTime: 1
   InteractibleFansPerLevel: 03000000080000000f00000014000000190000001e0000002300000028000000
   Arms: {fileID: 4300000, guid: 1239bcc9da6db6c4ebeddd9546c78998, type: 3}
   Body: {fileID: 4300000, guid: fddaea061cb3c0547872c8f5873f346a, type: 3}
@@ -53,7 +53,7 @@ MonoBehaviour:
   - 25
   - 35
   - 45
-  IgnoreConsecutiveErrors: 0
+  DemoMode: 0
   MaxConsecutiveErrors: 5
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
