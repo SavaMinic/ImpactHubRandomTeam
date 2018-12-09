@@ -52,7 +52,10 @@ namespace RandomName.UI
 
         public void Die(bool success = false, bool instantClear = false)
         {
-            if (instantClear && !isAnimating)
+            if (isAnimating)
+                return;
+            
+            if (instantClear)
             {
                 Destroy(gameObject);
                 return;
