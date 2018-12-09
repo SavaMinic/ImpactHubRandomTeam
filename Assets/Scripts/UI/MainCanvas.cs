@@ -87,7 +87,7 @@ namespace RandomName.UI
             });
         }
 
-        public void ClearButton(Entity entity)
+        public void ClearButton(Entity entity, bool isSuccess = false)
         {
             var index = buttons.FindIndex(b => b.Entity == entity);
             if (index == -1)
@@ -95,15 +95,15 @@ namespace RandomName.UI
                 Debug.LogError("NO BUTTON WITH INDEX");
                 return;
             }
-            buttons[index].Button.Die();
+            buttons[index].Button.Die(isSuccess);
             buttons.RemoveAt(index);
         }
 
-        public void ClearAllInteractible()
+        public void ClearAllInteractible(bool instantClear = false)
         {
             for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].Button.Die();
+                buttons[i].Button.Die(instantClear: instantClear);
             }
             buttons.Clear();
         }
@@ -116,8 +116,6 @@ namespace RandomName.UI
                 Debug.LogError("NO BUTTON WITH INDEX");
                 return;
             }
-            buttons[index].Button.Die();
-            buttons.RemoveAt(index);
             GameController.I.FanInteracted(entity);
         }
 

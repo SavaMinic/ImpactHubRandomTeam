@@ -16,6 +16,7 @@ namespace RandomName.UI
         private Entity myEntity;
 
         private IEnumerator fadeAnim;
+        private bool isAnimating;
         
         private void Awake()
         {
@@ -49,13 +50,24 @@ namespace RandomName.UI
             transform.position = pos;
         }
 
-        public void Die()
+        public void Die(bool success = false, bool instantClear = false)
         {
+            if (instantClear && !isAnimating)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            isAnimating = true;
+            var colors = myButton.colors;
+            colors.disabledColor = success ? Color.green : Color.red;
+            myButton.colors = colors;
+            myButton.interactable = false;
             if (fadeAnim != null)
             {
                 StopCoroutine(fadeAnim);
             }
-            fadeAnim = FadeAnim(false, 0.2f, () =>
+            fadeAnim = FadeAnim(false, 0.4f, () =>
             {
                 Destroy(gameObject);
             });
@@ -75,6 +87,10 @@ namespace RandomName.UI
             for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / duration)
             {
                 myCanvasGroup.alpha = Mathf.Lerp(alpha, endAlpha, t);
+                if (!isFadeIn)
+                {
+                    myRectTransform.localScale = Vector3.one * (3f * t + 1f);
+                }
                 yield return null;
             }
             callback?.Invoke();

@@ -166,18 +166,18 @@ public class GameController : MonoBehaviour
 		MaxLevel++;
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
 		CameraController.I.OverviewCam(MaxLevel);
-		ClearAllInteractible();
+		ClearAllInteractible(true);
 		timeToGenerateInteraction = GameSettings.I.StartTimeToGenerateInteraction;
 	}
 
 	public void FanInteracted(Entity entity)
 	{
 		var fanAmount = manager.GetComponentData<WavingFan>(entity).Value * 100f;
-		if (fanAmount > GameSettings.I.WavingFanAmountForSuccess)
+		var isSuccess = fanAmount > GameSettings.I.WavingFanAmountForSuccess;
+		if (isSuccess)
 		{
 			// SUCCESS
 			CurrentScore += GameSettings.I.IncreaseForSuccess;
-			Debug.LogError("SUCCESS");
 		}
 		else
 		{
@@ -186,16 +186,17 @@ public class GameController : MonoBehaviour
 		}
 		activeInteractibleFans.Remove(entity);
 		manager.SetComponentData(entity, new InteractiveTag { LookingForAttention = 0 });
+		MainCanvas.I.ClearButton(entity, isSuccess);
 	}
 
-	public void ClearAllInteractible()
+	public void ClearAllInteractible(bool instantClear = false)
 	{
 		for (int i = 0; i < activeInteractibleFans.Count; i++)
 		{
 			manager.SetComponentData(activeInteractibleFans[i], new InteractiveTag { LookingForAttention = 0 });
 		}
 		activeInteractibleFans.Clear();
-		MainCanvas.I.ClearAllInteractible();
+		MainCanvas.I.ClearAllInteractible(instantClear);
 	}
 
 	public void AddNewFun(Entity fan, int level, bool isInteractable)
