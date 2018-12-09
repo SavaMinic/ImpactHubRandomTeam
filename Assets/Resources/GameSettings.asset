@@ -41,6 +41,18 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 94cdc4fca4792cd4da05c165a7968f7b, type: 2}
   - {fileID: 2100000, guid: 56334606eb09ba94a962e898f5f953a4, type: 2}
   - {fileID: 2100000, guid: 5f17d7b174d93924cb898b683e501e1d, type: 2}
+  IncreaseForSuccess: 5
+  DecreaseForFailure: -3
+  DecreaseForMiss: -2
+  ScorePerLevel:
+  - 6
+  - 10
+  - 15
+  - 20
+  - 20
+  - 25
+  - 35
+  - 45
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000

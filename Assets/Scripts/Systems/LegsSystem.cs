@@ -17,7 +17,7 @@ public class LegsSystem : JobComponentSystem {
         public float debug2;
         public void Execute(ref Position position, ref Rotation rotation, [ReadOnly]ref Legs hands, [ReadOnly]ref WavingFan wavingFan)
         {
-            position.Value.y = hands.InitPosition.y + wavingFan.Value * 100f;
+            position.Value.y = hands.InitPosition.y + wavingFan.Value * 300f;
             rotation.Value = math.mul(hands.InitRotation,
                 quaternion.Euler(math.lerp(debug1, debug2, wavingFan.Value), 0, 0));
         }

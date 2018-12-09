@@ -48,6 +48,17 @@ public class GameSettings : ScriptableObject
     public Mesh Legs;
     public Material[] Materials;
     
+    public float IncreaseForSuccess;
+    public float DecreaseForFailure;
+    public float DecreaseForMiss;
+    public List<float> ScorePerLevel;
+    
+    public float GetScorePerLevel(int level)
+    {
+        level = Mathf.Clamp(level, 0, ScorePerLevel.Count - 1);
+        return ScorePerLevel[level];
+    }
+    
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;
     public float TimeToGenerateInteraction;

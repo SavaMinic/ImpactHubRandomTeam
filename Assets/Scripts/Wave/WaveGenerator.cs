@@ -42,7 +42,9 @@ namespace RandomName.Wave
 
             for (int level = 0; level < 15; level++)
             {
-                 AddWave(level, Random.Range(-90, 90), 2f / (level + 1), float3.zero);
+                float range = Random.Range(-1.0f, 1.0f);
+                int binar = range < 0.0 ? -1 : 1;
+                AddWave(level, Random.Range(-90, 90), binar, float3.zero);
             }
         }
 
