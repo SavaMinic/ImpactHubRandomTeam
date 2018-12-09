@@ -41,6 +41,12 @@ public class GameSettings : ScriptableObject
         level = Mathf.Clamp(level, 0, InteractibleFansPerLevel.Count - 1);
         return InteractibleFansPerLevel[level];
     }
+
+    [Header("Meshes")] 
+    public Mesh Arms;
+    public Mesh Body;
+    public Mesh Legs;
+    public Material[] Materials;
     
     [Header("Interaction")]
     public float StartTimeToGenerateInteraction;

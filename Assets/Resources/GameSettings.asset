@@ -32,6 +32,15 @@ MonoBehaviour:
   WavingFanAmountForSuccess: 0.2
   InteractIgnoreTime: 1.5
   InteractibleFansPerLevel: 03000000080000000f00000014000000190000001e0000002300000028000000
+  Arms: {fileID: 4300000, guid: 1239bcc9da6db6c4ebeddd9546c78998, type: 3}
+  Body: {fileID: 4300000, guid: fddaea061cb3c0547872c8f5873f346a, type: 3}
+  Legs: {fileID: 4300000, guid: 94e240b717447a546b1f42de8e18cd47, type: 3}
+  Materials:
+  - {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
+  - {fileID: 2100000, guid: f71d41d7c8275f548b397987b09b5201, type: 2}
+  - {fileID: 2100000, guid: 94cdc4fca4792cd4da05c165a7968f7b, type: 2}
+  - {fileID: 2100000, guid: 56334606eb09ba94a962e898f5f953a4, type: 2}
+  - {fileID: 2100000, guid: 5f17d7b174d93924cb898b683e501e1d, type: 2}
   StartTimeToGenerateInteraction: 3
   TimeToGenerateInteraction: 4
   InteractionCountPerLevel: 01000000020000000200000002000000030000000300000004000000040000000500000005000000
