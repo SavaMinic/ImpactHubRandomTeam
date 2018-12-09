@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaed5c4c8e5a4e88ac0a22e67425c1e, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  MaxLevel: 13
   RadiusPerLevel:
   - 5
   - 10
@@ -118,3 +119,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Period: 2
+  outroDebug: 0
