@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 114479056196796930}
   - component: {fileID: 114717250698637684}
   - component: {fileID: 114697599452476598}
-  - component: {fileID: 114836755103989898}
   - component: {fileID: 114232741038767794}
   - component: {fileID: 114837962915500792}
+  - component: {fileID: 114489127374180322}
   m_Layer: 0
   m_Name: FanArmsTest
   m_TagString: Untagged
@@ -88,9 +88,28 @@ MonoBehaviour:
       y: 0
       z: 0
     InitRotationEuler:
-      x: 0
-      y: 0
-      z: 0
+      value:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+--- !u!114 &114489127374180322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344174612019594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0fd4427893a4a16ba0c267dfd00217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    mesh: {fileID: 4300000, guid: 1239bcc9da6db6c4ebeddd9546c78998, type: 3}
+    material: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
+    subMesh: 0
+    castShadows: 0
+    receiveShadows: 0
 --- !u!114 &114697599452476598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,23 +144,6 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
---- !u!114 &114836755103989898
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1344174612019594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b0fd4427893a4a16ba0c267dfd00217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedData:
-    mesh: {fileID: 4300000, guid: 1239bcc9da6db6c4ebeddd9546c78998, type: 3}
-    material: {fileID: 2100000, guid: b1fd072c76a99a742ab2fba9cf1f3f4f, type: 2}
-    subMesh: 0
-    castShadows: 0
-    receiveShadows: 0
 --- !u!114 &114837962915500792
 MonoBehaviour:
   m_ObjectHideFlags: 1

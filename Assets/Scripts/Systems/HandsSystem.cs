@@ -16,7 +16,7 @@ public class HandsSystem : JobComponentSystem {
         {
             position.Value.y = hands.InitPosition.y + wavingFan.Value * 300f;
             rotation.Value = math.mul(hands.InitRotationEuler,
-                quaternion.Euler(math.lerp(0f, -180f, wavingFan.Value), 0, 0));
+                quaternion.Euler(math.lerp(0f, -180f, 2 * wavingFan.Value), 0, 0));
         }
     }
 

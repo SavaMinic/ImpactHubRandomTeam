@@ -19,7 +19,7 @@ public class LegsSystem : JobComponentSystem {
         {
             position.Value.y = hands.InitPosition.y + wavingFan.Value * 300f;
             rotation.Value = math.mul(hands.InitRotation,
-                quaternion.Euler(math.lerp(debug1, debug2, wavingFan.Value), 0, 0));
+                quaternion.Euler(math.lerp(debug1, debug2, 2 * wavingFan.Value), 0, 0));
         }
 
     }

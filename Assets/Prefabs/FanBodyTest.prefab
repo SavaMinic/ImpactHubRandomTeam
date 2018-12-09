@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 114259109209696998}
   - component: {fileID: 114717250698637684}
   - component: {fileID: 114697599452476598}
-  - component: {fileID: 114836755103989898}
   - component: {fileID: 114232741038767794}
   - component: {fileID: 114378267731410998}
   - component: {fileID: 114998429070370902}
+  - component: {fileID: 114818980975468512}
   m_Layer: 0
   m_Name: FanBodyTest
   m_TagString: Untagged
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedData:
     Value: 0
+    Level: 0
 --- !u!114 &114259109209696998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +121,7 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
---- !u!114 &114836755103989898
+--- !u!114 &114818980975468512
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

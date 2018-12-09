@@ -23,6 +23,9 @@ public class StadiumSpawnBootstrap : MonoBehaviour
     [SerializeField]
     private GameObject seatPrefab;
 
+    public Material material1;
+    public Color[] emmisionColors;
+
     private MeshInstanceRendererComponent[] Meshes;
 
 	[SerializeField]
@@ -111,21 +114,22 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 			for (float theta = 0; theta < circleRadians ; theta += dTheta)
 			{
 				var randomIndex = Random.Range(0, RenderComponents.Count);
-				var direction = new float3(math.sin(theta), 0.68f, math.cos(theta));
+                var direction = new float3(math.sin(theta), 0.68f, math.cos(theta));
 				var pos = (radius + 0.3f * level) * direction - new float3(0, startingHeight, 0) +
 				          random.NextFloat3(new float3(spread, spread, spread), new float3(-spread, -0, -spread));
 				var rot = quaternion.LookRotation(-new float3(direction.x, 0f, direction.z), Up);
 				
 				var euler = new Quaternion(rot.value.x, rot.value.y, rot.value.z, rot.value.w).eulerAngles;
 				var isInteractable = column < interactibleFansCount || column > maxColums - interactibleFansCount;
-				
+                
                 var seatEntity = entityManager.Instantiate(seatPrefab);
                 entityManager.SetComponentData(seatEntity, new Position { Value = pos + new float3(0, 0.3f, -0.0f)});
                 entityManager.SetComponentData(seatEntity, new Rotation { Value = rot });
 
+
                 var entity = entityManager.Instantiate(fanPrefab);
 				entityManager.SetComponentData(entity, new Position { Value = pos });
-				entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
+                entityManager.SetComponentData(entity, new Body() { InitPosition = pos });
 				entityManager.SetComponentData(entity, new Rotation { Value = rot });
                 entityManager.SetComponentData(entity, new WavingFan { Level = currentLevel });
                 entityManager.AddComponentData(entity, new SeatingData { Column = column, Row = row });
@@ -137,7 +141,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				}
 
 				var armsEntity = entityManager.Instantiate(fanArmsPrefab);
-				entityManager.SetComponentData(armsEntity, new Position {Value = pos+armOffset});
+                entityManager.SetComponentData(armsEntity, new Position {Value = pos+armOffset});
 				entityManager.SetComponentData(armsEntity, new Hands() { InitPosition = pos + armOffset, InitRotationEuler = rot });
 				entityManager.SetComponentData(armsEntity, new Rotation {Value = rot});
                 entityManager.SetComponentData(armsEntity, new WavingFan { Level = currentLevel });
@@ -145,17 +149,17 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 				entityManager.SetSharedComponentData(armsEntity, RenderComponents[randomIndex].Arms);
 				
 				var legEntity = entityManager.Instantiate(fanLegPrefab);
-				entityManager.SetComponentData(legEntity, new Position {Value = pos + legOffset});
+                entityManager.SetComponentData(legEntity, new Position {Value = pos + legOffset});
 				entityManager.SetComponentData(legEntity, new Legs() { InitPosition = pos + legOffset, InitRotation = rot });
 				entityManager.SetComponentData(legEntity, new Rotation {Value = rot});
 				entityManager.SetComponentData(legEntity, new WavingFan { Level = currentLevel });
 				entityManager.SetComponentData(legEntity, new Scale {Value = new float3(5, 5, 5)});
 				entityManager.SetSharedComponentData(legEntity, RenderComponents[randomIndex].Legs);
-//				var attachEntity = entityManager.CreateEntity();
-//				entityManager.AddComponentData(attachEntity, new Attach {Parent = entity, Child = armsEntity});
-				
-				GameController.I.AddNewFun(entity, level, isInteractable);
-                count += 2;
+
+                material1.SetColor("_EmissionColor", emmisionColors[currentLevel]);
+
+                GameController.I.AddNewFun(entity, level, isInteractable);
+                count += 4;
 				column++;
 			}
 			row++;
