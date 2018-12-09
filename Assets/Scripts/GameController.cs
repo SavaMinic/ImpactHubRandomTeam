@@ -102,7 +102,8 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		I = this;
-		World.Active.GetExistingManager<GameOutroSystem>().Enabled = false;
+		
+		EnableStartingSystems();
 	}
 
 	private void Start()
@@ -227,6 +228,16 @@ public class GameController : MonoBehaviour
 		World.Active.GetExistingManager<GenerateInteractiveSystem>().Enabled = false;
 		
 		World.Active.GetExistingManager<GameOutroSystem>().Enabled = true;
+	}
+	
+	private void EnableStartingSystems()
+	{
+		World.Active.GetExistingManager<WaveMovementSystem>().Enabled = true;
+		World.Active.GetExistingManager<WaveSystem>().Enabled = true;
+		World.Active.GetExistingManager<WaveReachingTopSystem>().Enabled = true;
+		World.Active.GetExistingManager<GenerateInteractiveSystem>().Enabled = true;
+		
+		World.Active.GetExistingManager<GameOutroSystem>().Enabled = false;
 	}
 
 	public void ProgressToNextLevel()
