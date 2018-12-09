@@ -104,7 +104,7 @@ public class StadiumSpawnBootstrap : MonoBehaviour
         init();
 
         Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentLevel + 1);
-        const float spread = 0.5f;
+        const float spread = 0.35f;
 
 		var dx = (standsOuterRadius - standsInnerRadius) / (NumOfRows + 2);
 		var circleRadians = math.radians(360f);
