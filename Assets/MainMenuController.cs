@@ -13,12 +13,16 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField] private Button startButton;
 	[SerializeField] private Button creditsButton;
 	[SerializeField] private Button exitButton;
+	[SerializeField] private Button backButtons;
 	
 	private void Awake()
 	{
+		SetActiveMainMenuCanvas(true);
+		
 		startButton.onClick.AddListener(() => OnStartClicked());
 		creditsButton.onClick.AddListener(() => OnCreditsClicked());
 		exitButton.onClick.AddListener(() => OnExitClicked());
+		backButtons.onClick.AddListener(() => SetActiveMainMenuCanvas(true));
 	}
 
 	private void OnStartClicked()
@@ -28,6 +32,7 @@ public class MainMenuController : MonoBehaviour
 
 	private void OnCreditsClicked()
 	{	
+		SetActiveMainMenuCanvas(false);
 	}
 	
 	private void OnExitClicked()
@@ -35,4 +40,9 @@ public class MainMenuController : MonoBehaviour
 		Application.Quit();
 	}
 
+	private void SetActiveMainMenuCanvas(bool active)
+	{
+		mainMenuCanvas.SetActive(active);
+		creditsCanvas.SetActive(!active);
+	}
 }
