@@ -31,6 +31,8 @@ namespace RandomName.UI
         public CanvasGroup winGroup;
         public CanvasGroup loseGroup;
 
+        public Button skipButton;
+
         [Serializable]
         private class ButtonWithEntity
         {
@@ -54,6 +56,16 @@ namespace RandomName.UI
 
             progressMaxWidth = 790f;
             progressImage.sizeDelta = new Vector2(0f, progressImage.sizeDelta.y);
+
+            var isDemo = GameSettings.I.DemoMode;
+            skipButton.gameObject.SetActive(isDemo);
+            if (isDemo)
+            {
+                skipButton.onClick.AddListener(() =>
+                {
+                    GameController.I.SkipLevel();
+                });
+            }
         }
 
         void Start()

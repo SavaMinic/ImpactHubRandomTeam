@@ -121,8 +121,7 @@ public class GameController : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-            ProgressToNextLevel();
-			CurrentScore = 0f;
+			SkipLevel();
 		}
 		
 		// check activeInteractibleFans if they are ok
@@ -181,6 +180,12 @@ public class GameController : MonoBehaviour
 	#endregion
     
 	#region Public
+
+	public void SkipLevel()
+	{
+		ProgressToNextLevel();
+		CurrentScore = 0f;
+	}
 
 	public void EndGame(bool isWon)
 	{
