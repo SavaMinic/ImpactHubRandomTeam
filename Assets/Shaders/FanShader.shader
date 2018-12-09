@@ -36,11 +36,12 @@
 			{
 				float4 vertex : SV_POSITION;
 				float2 uv_Color : TEXCOORD00;
+				float3 world : TEXCOORD01;
 			};
 
-			sampler2D _Color;
-            float4 _Color_ST;
-			
+			uniform sampler2D _Color;
+            uniform float4 _Color_ST;
+
 			v2f vert (appdata v)
 			{
 				v2f o;
@@ -50,12 +51,14 @@
 				
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv_Color = TRANSFORM_TEX(v.uv_Color, _Color);
+				o.world = mul(unity_ObjectToWorld, v.vertex).xyz;
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				return tex2D(_Color, i.uv_Color);
+				float factor = 1 + i.world.y / 50;
+				return tex2D(_Color, i.uv_Color) * factor;
 			}
 			ENDCG
 		}

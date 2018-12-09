@@ -96,12 +96,12 @@ public class StadiumSpawnBootstrap : MonoBehaviour
 
     public void InstantiateEntities(int level)
 	{
-        Material[] materials = GameSettings.I.Materials;
-        foreach (Material material in materials) {
-            material.SetColor("_EmissionColor", emmisionColors[currentLevel]);
-        }
+        //Material[] materials = GameSettings.I.Materials;
+        //foreach (Material material in materials) {
+        //    material.SetColor("_EmissionColor", emmisionColors[currentLevel]);
+        //}
 
-        init();
+        //init();
 
         Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint)currentLevel + 1);
         const float spread = 0.35f;
