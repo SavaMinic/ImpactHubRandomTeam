@@ -21,6 +21,11 @@ public class GameController : MonoBehaviour
 	#endregion
     
 	#region Fields
+
+	public AudioClip[] yeah;
+	
+	public AudioSource aSource;
+	public AudioSource yeahAS;
 	
 	private EntityManager manager;
 
@@ -254,6 +259,8 @@ public class GameController : MonoBehaviour
 			EndGame(true);
 			return;
 		}
+
+		aSource.volume += 0.05f;
 		
 		MaxLevel++;
 		StadiumSpawnBootstrap.Instance.InstantiateEntities(MaxLevel);
@@ -272,6 +279,9 @@ public class GameController : MonoBehaviour
 			// SUCCESS
 			CurrentScore += GameSettings.I.IncreaseForSuccess;
 			ConsecutiveErrorCount = 0;
+			
+			
+			yeahAS.PlayOneShot(yeah[Random.Range(0, yeah.Length)]);
 		}
 		else
 		{

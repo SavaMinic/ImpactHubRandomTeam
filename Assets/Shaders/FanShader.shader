@@ -57,7 +57,7 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float factor = 1 + i.world.y / 50;
+				float factor = 0.55 + i.world.y / 130;
 				return tex2D(_Color, i.uv_Color) * factor;
 			}
 			ENDCG
