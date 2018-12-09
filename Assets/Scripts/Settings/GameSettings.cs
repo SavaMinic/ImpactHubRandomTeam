@@ -81,4 +81,7 @@ public class GameSettings : ScriptableObject
         return InteractionOffsetPerLevel[level];
     }
 
+    public AnimationCurve OutroWavingFanCurve;
+    public float Period = 2f;
+    public float outroDebug;
 }
