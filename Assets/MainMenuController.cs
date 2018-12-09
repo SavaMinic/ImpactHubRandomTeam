@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
 
+	[SerializeField] private GameObject mainMenuCanvas;
+	[SerializeField] private GameObject creditsCanvas;
+	
 	[SerializeField] private Button startButton;
 	[SerializeField] private Button creditsButton;
 	[SerializeField] private Button exitButton;
-
+	
 	private void Awake()
 	{
 		startButton.onClick.AddListener(() => OnStartClicked());
