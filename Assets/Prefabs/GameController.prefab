@@ -237,6 +237,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1366270669115868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4159562644661932}
+  - component: {fileID: 114510334597953204}
+  m_Layer: 0
+  m_Name: DollyTrack1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1373175463681094
 GameObject:
   m_ObjectHideFlags: 1
@@ -342,7 +358,7 @@ GameObject:
   - component: {fileID: 4524783111634894}
   - component: {fileID: 114062056206707872}
   m_Layer: 0
-  m_Name: DollyTrack1
+  m_Name: DollyTrack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,6 +624,19 @@ Transform:
   m_Father: {fileID: 4337135835252062}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 14.776001, y: 0.025, z: -0.17600001}
+--- !u!4 &4159562644661932
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366270669115868}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 32.8, y: 27.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4827158821437724}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4171617050852534
 Transform:
   m_ObjectHideFlags: 1
@@ -777,7 +806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4827158821437724}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4618513675073552
 Transform:
@@ -798,7 +827,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1874427460414844}
-  m_LocalRotation: {x: 0.20539133, y: 0.03824997, z: -0.014549503, w: 0.977824}
+  m_LocalRotation: {x: 0.20539132, y: 0.038249936, z: -0.014549496, w: 0.977824}
   m_LocalPosition: {x: 0, y: 13.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -875,8 +904,9 @@ Transform:
   - {fileID: 4155263301512352}
   - {fileID: 4337135835252062}
   - {fileID: 4962125199928110}
-  - {fileID: 4524783111634894}
+  - {fileID: 4159562644661932}
   - {fileID: 4757975546713552}
+  - {fileID: 4524783111634894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1086,9 +1116,13 @@ MonoBehaviour:
     roll: 0
   - position: {x: -113.99658, y: 49.2922, z: -37.96115}
     roll: 0
+  - position: {x: -75.72136, y: 35.276176, z: -60.21284}
+    roll: 0
   - position: {x: -19.437286, y: 23.477453, z: -72.97712}
     roll: 0
   - position: {x: 65.86374, y: 117.62472, z: 0.5370102}
+    roll: 0
+  - position: {x: -24.898537, y: 224.82425, z: 175.29848}
     roll: 0
   - position: {x: -44.438496, y: 32.75595, z: 41.76801}
     roll: 0
@@ -1249,6 +1283,68 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  dollyBigTrackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 7.08399
+      value: 6.085069
+      inSlope: 0.38986805
+      outSlope: 0.018018201
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 11.804726
+      value: 6.1701283
+      inSlope: 0.07430423
+      outSlope: 0.07430423
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 14.174316
+      value: 8.803833
+      inSlope: 0.00089269783
+      outSlope: 0.00089269783
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 18.74365
+      value: 8.803833
+      inSlope: -0
+      outSlope: 0.6015642
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 22.672794
+      value: 10.22449
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  smallPath: {fileID: 114510334597953204}
+  bigPath: {fileID: 114062056206707872}
 --- !u!114 &114183845607174462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1573,6 +1669,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114510334597953204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366270669115868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200b19ca1a9685429ed7e043c28e904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 1
+  m_Waypoints:
+  - position: {x: 8.394749, y: 1.309782, z: 19.149801}
+    roll: 0
+  - position: {x: -65.38434, y: 1.309782, z: 32.348732}
+    roll: 0
+  - position: {x: -122.30142, y: 63.933723, z: -15.672995}
+    roll: 0
+  - position: {x: -113.99658, y: 49.2922, z: -37.96115}
+    roll: 0
+  - position: {x: -19.437286, y: 23.477453, z: -72.97712}
+    roll: 0
+  - position: {x: 65.86374, y: 117.62472, z: 0.5370102}
+    roll: 0
+  - position: {x: -44.438496, y: 32.75595, z: 41.76801}
+    roll: 0
 --- !u!114 &114519950520616136
 MonoBehaviour:
   m_ObjectHideFlags: 1

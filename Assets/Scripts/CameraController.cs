@@ -19,6 +19,10 @@ public class CameraController : MonoBehaviour
 
     public CinemachineVirtualCamera dollyTrackCam;
     public AnimationCurve dollyTrackCurve;
+    public AnimationCurve dollyBigTrackCurve;
+
+    public CinemachineSmoothPath smallPath;
+    public CinemachineSmoothPath bigPath;
 
     #endregion
     
@@ -37,7 +41,9 @@ public class CameraController : MonoBehaviour
 
         if (dollyTrackCam.Priority == 100)
         {
-            var path = dollyTrackCurve.Evaluate(Time.time % 20f);
+            var duration = GameSettings.I.DemoMode ? 30f : 20f;
+            var curve = GameSettings.I.DemoMode ? dollyBigTrackCurve : dollyTrackCurve;
+            var path = curve.Evaluate(Time.time % duration);
             dollyTrackCam.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = path;
         }
         
@@ -50,6 +56,8 @@ public class CameraController : MonoBehaviour
     
     public void EndGame(bool isWon)
     {
+        var path = GameSettings.I.DemoMode ? bigPath : smallPath;
+        dollyTrackCam.GetCinemachineComponent<CinemachineTrackedDolly>().m_Path = path;
         SetActiveCamera(dollyTrackCam);
     }
 
