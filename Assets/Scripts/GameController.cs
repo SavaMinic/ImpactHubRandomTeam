@@ -75,6 +75,10 @@ public class GameController : MonoBehaviour
 		set
 		{
 			consecutiveErrorCount = value;
+			if (GameSettings.I.DemoMode)
+			{
+				consecutiveErrorCount = 0;
+			}
 			MainCanvas.I.RefreshConsecutiveErrorCount(consecutiveErrorCount);
 			if (consecutiveErrorCount == GameSettings.I.MaxConsecutiveErrors)
 			{

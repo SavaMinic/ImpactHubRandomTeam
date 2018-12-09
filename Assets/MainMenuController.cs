@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
 
-	[SerializeField] private GameObject mainMenuCanvas;
-	[SerializeField] private GameObject creditsCanvas;
+	[SerializeField] private CanvasGroup mainMenuCanvas;
+	[SerializeField] private CanvasGroup creditsCanvas;
 	
 	[SerializeField] private Button startButton;
+	[SerializeField] private Button demoButton;
 	[SerializeField] private Button creditsButton;
 	[SerializeField] private Button exitButton;
 	[SerializeField] private Button backButtons;
@@ -19,14 +20,22 @@ public class MainMenuController : MonoBehaviour
 	{
 		SetActiveMainMenuCanvas(true);
 		
-		startButton.onClick.AddListener(() => OnStartClicked());
-		creditsButton.onClick.AddListener(() => OnCreditsClicked());
-		exitButton.onClick.AddListener(() => OnExitClicked());
+		startButton.onClick.AddListener(OnStartClicked);
+		demoButton.onClick.AddListener(OnDemoClicked);
+		creditsButton.onClick.AddListener(OnCreditsClicked);
+		exitButton.onClick.AddListener(OnExitClicked);
 		backButtons.onClick.AddListener(() => SetActiveMainMenuCanvas(true));
 	}
 
 	private void OnStartClicked()
 	{
+		GameSettings.I.DemoMode = false;
+		SceneManager.LoadScene("GameScene");
+	}
+
+	private void OnDemoClicked()
+	{
+		GameSettings.I.DemoMode = true;
 		SceneManager.LoadScene("GameScene");
 	}
 
@@ -42,7 +51,8 @@ public class MainMenuController : MonoBehaviour
 
 	private void SetActiveMainMenuCanvas(bool active)
 	{
-		mainMenuCanvas.SetActive(active);
-		creditsCanvas.SetActive(!active);
+		mainMenuCanvas.alpha = active ? 1f : 0f;
+		creditsCanvas.alpha = active ? 0f : 1f;
+		backButtons.gameObject.SetActive(!active);
 	}
 }

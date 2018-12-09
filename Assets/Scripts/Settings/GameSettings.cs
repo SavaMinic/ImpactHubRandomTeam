@@ -53,6 +53,7 @@ public class GameSettings : ScriptableObject
     public float DecreaseForMiss;
     public List<float> ScorePerLevel;
 
+    public bool DemoMode;
     public int MaxConsecutiveErrors;
     
     public float GetScorePerLevel(int level)
