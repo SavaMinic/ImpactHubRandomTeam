@@ -160,6 +160,10 @@ public class GameController : MonoBehaviour
 		{
 			SkipLevel();
 		}
+
+		// no need for interactions in demo mode
+		if (GameSettings.I.DemoMode)
+			return;
 		
 		// check activeInteractibleFans if they are ok
 		entitiesToRemove.Clear();
@@ -220,6 +224,8 @@ public class GameController : MonoBehaviour
 
 	public void SkipLevel()
 	{
+		if (MaxLevel == GameSettings.I.MaxLevel)
+			return;
 		ProgressToNextLevel();
 		CurrentScore = 0f;
 	}
@@ -250,6 +256,12 @@ public class GameController : MonoBehaviour
 		World.Active.GetExistingManager<GenerateInteractiveSystem>().Enabled = true;
 		
 		World.Active.GetExistingManager<GameOutroSystem>().Enabled = false;
+	}
+
+	public void SetDanceMode(bool danceOff)
+	{
+		if (danceOff) DisableAllSystems();
+		else EnableStartingSystems();
 	}
 
 	public void ProgressToNextLevel()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace RandomName.UI
@@ -21,6 +22,8 @@ namespace RandomName.UI
         public RectTransform progressImage;
         public RectTransform progressIncreaseImage;
         public RectTransform progressDecreaseImage;
+        
+        public GameObject progressImageObject;
 
         private Camera mainCamera;
 
@@ -32,6 +35,9 @@ namespace RandomName.UI
         public CanvasGroup loseGroup;
 
         public Button skipButton;
+        public Button cameraButton;
+        public Button danceButton;
+        public Button exitButton;
 
         public Text FPSCounter;
 
@@ -45,6 +51,8 @@ namespace RandomName.UI
         private List<ButtonWithEntity> buttons = new List<ButtonWithEntity>();
 
         private float progressMaxWidth;
+
+        private bool isDanceMode;
 
         #region Mono
 
@@ -65,6 +73,27 @@ namespace RandomName.UI
             {
                 GameController.I.SkipLevel();
             });
+            
+            cameraButton.gameObject.SetActive(isDemo);
+            cameraButton.onClick.AddListener(() =>
+            {
+                CameraController.I.ToggleNextCamera();
+            });
+            
+            danceButton.gameObject.SetActive(isDemo);
+            danceButton.onClick.AddListener(() =>
+            {
+                isDanceMode = !isDanceMode;
+                GameController.I.SetDanceMode(isDanceMode);
+            });
+            
+            exitButton.gameObject.SetActive(isDemo);
+            exitButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene("MainMenu");
+            });
+            
+            progressImageObject.gameObject.SetActive(!isDemo);
         }
 
         void Start()

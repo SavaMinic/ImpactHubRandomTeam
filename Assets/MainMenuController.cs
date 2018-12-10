@@ -16,6 +16,7 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField] private Button exitButton;
 	[SerializeField] private Button backButtons;
 	[SerializeField] private Outline titleTextOutline;
+	[SerializeField] private GameObject titleObject;
 	[SerializeField] private List<Color> titleColors;
 	[SerializeField] private float titleTextAnimationDuration;
 
@@ -65,7 +66,9 @@ public class MainMenuController : MonoBehaviour
 	{
 		mainMenuCanvas.alpha = active ? 1f : 0f;
 		creditsCanvas.alpha = active ? 0f : 1f;
+		creditsCanvas.interactable = !active;
 		backButtons.gameObject.SetActive(!active);
+		titleObject.gameObject.SetActive(active);
 	}
 
 	private IEnumerator DoTitleAnimation()

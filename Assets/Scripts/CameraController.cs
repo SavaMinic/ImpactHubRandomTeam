@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
 
     public CinemachineVirtualCamera fanCam;
     public List<CinemachineVirtualCamera> overviewCams;
+    public CinemachineVirtualCamera topCamera;
 
     public CinemachineVirtualCamera dollyTrackCam;
     public AnimationCurve dollyTrackCurve;
@@ -23,6 +24,8 @@ public class CameraController : MonoBehaviour
 
     public CinemachineSmoothPath smallPath;
     public CinemachineSmoothPath bigPath;
+
+    private CinemachineVirtualCamera activeCam;
 
     #endregion
     
@@ -39,7 +42,7 @@ public class CameraController : MonoBehaviour
         if (!Application.isPlaying)
             return;
 
-        if (dollyTrackCam.Priority == 100)
+        if (dollyTrackCam == activeCam)
         {
             var duration = GameSettings.I.DemoMode ? 30f : 20f;
             var curve = GameSettings.I.DemoMode ? dollyBigTrackCurve : dollyTrackCurve;
@@ -53,6 +56,18 @@ public class CameraController : MonoBehaviour
     
     #region Public
 
+    public void ToggleNextCamera()
+    {
+        var lastCamIndex = math.clamp(GameController.I.MaxLevel, 0, overviewCams.Count - 1);
+        if (activeCam == dollyTrackCam)
+            SetActiveCamera(overviewCams[lastCamIndex]);
+        else if (activeCam == overviewCams[lastCamIndex])
+            SetActiveCamera(topCamera);
+        else if (activeCam == topCamera)
+            SetActiveCamera(fanCam);
+        else
+            SetActiveCamera(dollyTrackCam);
+    }
     
     public void EndGame(bool isWon)
     {
@@ -63,6 +78,11 @@ public class CameraController : MonoBehaviour
 
     public void OverviewCam(int level)
     {
+        if (GameSettings.I.DemoMode 
+            && (activeCam == dollyTrackCam || activeCam == topCamera))
+        {
+            return;
+        }
         level = Mathf.Clamp(level, 0, overviewCams.Count - 1);
         SetActiveCamera(overviewCams[level]);
     }
@@ -75,10 +95,13 @@ public class CameraController : MonoBehaviour
     {
         fanCam.Priority = cam == fanCam ? 100 : 1;
         dollyTrackCam.Priority = cam == dollyTrackCam ? 100 : 1;
+        topCamera.Priority = cam == topCamera ? 100 : 1;
         for (int i = 0; i < overviewCams.Count; i++)
         {
             overviewCams[i].Priority = cam == overviewCams[i] ? 100 : 1;
         }
+
+        activeCam = cam;
     }
     
     #endregion
